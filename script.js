@@ -69,7 +69,7 @@ function showHadithOptions(category) {
     card.onclick = () => loadHadithDetail(id, category);
     card.innerHTML = `
       <h3>${data.title}</h3>
-      <p>${data.steps[0].translation.substring(0, 60)}...</p>
+      <p>${data.summary ? `<p>${data.summary}</p>` : ''}</p>
     `;
     optionsGrid.appendChild(card);
   });
