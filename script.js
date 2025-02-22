@@ -1,63 +1,19 @@
-// Data structure for hadith and supplications
-const hadithData = {
-  'wudhu': {
-    'hadith1': {
-      title: "وضوء | The Beautiful Way of Wudhu",
-      steps: [
-        {
-          arabic: "بَيْنَا أَمِيرُ الْمُؤْمِنِينَ (عَلَيْهِ السَّلاَمُ) ذَاتَ يَوْمٍ جَالِساً مَعَ ابْنِ الْحَنَفِيَّةِ إِذْ قَالَ: يَا مُحَمَّدُ ائتِنِي بِإِنَاءٍ فِيهِ مَاءٌ أَتَوَضَّأْ لِلصَّلَاةِ",
-          translation: "While the Commander of the Faithful (peace be upon him) was sitting one day with Ibn al-Hanafiyyah, he said: 'O Muhammad, bring me a vessel with water so I may perform ablution for prayer.'"
-        },
-        {
-          arabic: "فَأتَاهُ مُحَمَّدٌ بِالْمَاءِ فَأَكْفَأَ بِيَدِهِ الْيُمْنَى عَلَى يَدِهِ الْيُسْرَى ثُمَّ قَالَ: بِسْمِ الله الْحَمْدُ للهِ الَّذِي جَعَلَ الْمَاءَ طَهُوراً وَلَمْ يَجْعَلْهُ نَجِساً",
-          translation: "Muhammad brought him the water, and he poured his right hand over his left hand, then said: 'In the name of Allah. Praise be to Allah, Who made water purifying and not impure.'"
-        }
-        // Add more Wudhu steps here as needed
-      ]
-    },
-    'hadith2': {
-      title: "وضوء | Wudhu Wisdom from the Prophet",
-      steps: [
-        {
-          arabic: "هذا هو الحديث الثاني للوضوء، الخطوة الأولى",
-          translation: "This is the second hadith, step one."
-        }
-        // Add more Wudhu steps here as needed
-      ]
-    }
-  },
-  "sajjadiya": {
-    "supplication1": {
-      "title": "الدعاء بالتوبة | Supplication on Confession",
-      "steps": [
-        {
-          "arabic": "وَكَانَ مِنْ دُعَائِهِ عَلَيْهِ السَّلَامُ",
-          "translation": "And among his supplications, peace be upon him,"
-        },
-        {
-          "arabic": "فِي الِاعْتِرَافِ وَطَلَبِ التَّوْبَةِ إِلَى اللَّهِ تَعَالَى",
-          "translation": "in confession and seeking repentance to Allah the Exalted:"
-        },
-        {
-          "arabic": "اللَّهُمَّ إِنَّهُ يَحْجُبُنِي عَنْ مَسْأَلَتِكَ خِلَالٌ ثَلَاثٌ، وَتَحْدُونِي عَلَيْهَا خَلَّةٌ وَاحِدَةٌ",
-          "translation": "O Allah, three flaws prevent me from asking You, yet one quality compels me to do so:"
-        }
-        // Add remaining steps from your content as needed
-      ]
-    }
-  }
-};
-
-// Global variables
+// Global Variables
+let hadithData = {};  // Will be populated from data/data.json
 let currentStep = 1;
 let totalSteps = 0;
 let currentCategory = '';
 
-// Initialization when the page loads
-document.addEventListener('DOMContentLoaded', function() {
-  setupTopicCards();
-  setupSwipeGestures();
-});
+// Fetch the hadith data from the JSON file
+function loadHadithData() {
+  fetch('data/data.json')
+    .then(response => response.json())
+    .then(data => {
+      hadithData = data;
+      setupTopicCards();
+    })
+    .catch(err => console.error("Error loading hadith data:", err));
+}
 
 // Set up click events for topic cards
 function setupTopicCards() {
@@ -101,10 +57,10 @@ function showMainPage() {
 function showHadithOptions(category) {
   const optionsGrid = document.querySelector('.hadith-options-grid');
   const optionsTitle = document.getElementById('options-title');
-  
+
   optionsGrid.innerHTML = '';
-  optionsTitle.textContent = category === 'wudhu' 
-    ? 'Select a Wudhu Narration' 
+  optionsTitle.textContent = category === 'wudhu'
+    ? 'Select a Wudhu Narration'
     : 'Select a Supplication';
 
   Object.entries(hadithData[category]).forEach(([id, data]) => {
@@ -127,7 +83,7 @@ function showHadithOptions(category) {
 function loadHadithDetail(hadithId, category) {
   const hadith = hadithData[category][hadithId];
   const stepsContainer = document.getElementById('steps-container');
-  
+
   stepsContainer.innerHTML = '';
   document.getElementById('hadith-title').textContent = hadith.title;
 
@@ -192,5 +148,13 @@ function updateButtonState() {
 
 // Trigger a short vibration (if supported)
 function vibrate() {
-  navigator.vibrate?.(10);
+  if (navigator.vibrate) {
+    navigator.vibrate(10);
+  }
 }
+
+// Initialization when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  loadHadithData();
+  setupSwipeGestures();
+});

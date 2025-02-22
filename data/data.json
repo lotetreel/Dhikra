@@ -1,0 +1,45 @@
+{
+    "wudhu": {
+      "hadith1": {
+        "title": "وضوء | The Beautiful Way of Wudhu",
+        "steps": [
+          {
+            "arabic": "بَيْنَا أَمِيرُ الْمُؤْمِنِينَ (عَلَيْهِ السَّلاَمُ) ذَاتَ يَوْمٍ جَالِساً مَعَ ابْنِ الْحَنَفِيَّةِ إِذْ قَالَ: يَا مُحَمَّدُ ائتِنِي بِإِنَاءٍ فِيهِ مَاءٌ أَتَوَضَّأْ لِلصَّلَاةِ",
+            "translation": "While the Commander of the Faithful (peace be upon him) was sitting one day with Ibn al-Hanafiyyah, he said: 'O Muhammad, bring me a vessel with water so I may perform ablution for prayer.'"
+          },
+          {
+            "arabic": "فَأتَاهُ مُحَمَّدٌ بِالْمَاءِ فَأَكْفَأَ بِيَدِهِ الْيُمْنَى عَلَى يَدِهِ الْيُسْرَى ثُمَّ قَالَ: بِسْمِ الله الْحَمْدُ للهِ الَّذِي جَعَلَ الْمَاءَ طَهُوراً وَلَمْ يَجْعَلْهُ نَجِساً",
+            "translation": "Muhammad brought him the water, and he poured his right hand over his left hand, then said: 'In the name of Allah. Praise be to Allah, Who made water purifying and not impure.'"
+          }
+        ]
+      },
+      "hadith2": {
+        "title": "وضوء | Wudhu Wisdom from the Prophet",
+        "steps": [
+          {
+            "arabic": "هذا هو الحديث الثاني للوضوء، الخطوة الأولى",
+            "translation": "This is the second hadith, step one."
+          }
+        ]
+      }
+    },
+    "sajjadiya": {
+      "supplication1": {
+        "title": "الدعاء بالتوبة | Supplication on Confession",
+        "steps": [
+          {
+            "arabic": "وَكَانَ مِنْ دُعَائِهِ عَلَيْهِ السَّلَامُ",
+            "translation": "And among his supplications, peace be upon him,"
+          },
+          {
+            "arabic": "فِي الِاعْتِرَافِ وَطَلَبِ التَّوْبَةِ إِلَى اللَّهِ تَعَالَى",
+            "translation": "in confession and seeking repentance to Allah the Exalted:"
+          },
+          {
+            "arabic": "اللَّهُمَّ إِنَّهُ يَحْجُبُنِي عَنْ مَسْأَلَتِكَ خِلَالٌ ثَلَاثٌ، وَتَحْدُونِي عَلَيْهَا خَلَّةٌ وَاحِدَةٌ",
+            "translation": "O Allah, three flaws prevent me from asking You, yet one quality compels me to do so."
+          }
+        ]
+      }
+    }
+  }
