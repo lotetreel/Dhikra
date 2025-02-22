@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacred Reminders - Islamic Wisdom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">Sacred Reminders</h1>
+      <p class="subtitle">Explore authentic narrations from Islamic tradition</p>
+    </div>
+
+    <div class="topics-grid">
+      <!-- Wudhu Card -->
+      <div class="topic-card" data-category="wudhu">
+        <div class="topic-icon">💦</div>
+        <h2 class="topic-title">وضوء | Wudhu</h2>
+        <p class="topic-description">
+          Discover the beautiful traditions and supplications related to ritual purification
+        </p>
+      </div>
+
+      <!-- Sahifa al-Sajjadiya Card -->
+      <div class="topic-card" data-category="sajjadiya">
+        <div class="topic-icon">📜</div>
+        <h2 class="topic-title">الصحيفة السجادية | Sahifa al-Sajjadiya</h2>
+        <p class="topic-description">
+          Sacred supplications from Imam Zayn al-Abidin
+        </p>
+      </div>
+
+      <!-- Other Topics -->
+      <div class="topic-card">
+        <div class="topic-icon">📿</div>
+        <h2 class="topic-title">نوافل | Nawafil</h2>
+        <p class="topic-description">
+          Voluntary prayers and their spiritual significance
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">🌙</div>
+        <h2 class="topic-title">شهر رمضان | The Month of Ramadan</h2>
+        <p class="topic-description">
+          Special traditions for the blessed month
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">🤲</div>
+        <h2 class="topic-title">أدعية | Supplications</h2>
+        <p class="topic-description">
+          Daily duas from authentic sources
+        </p>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-icon">📖</div>
+        <h2 class="topic-title">أخلاق | Ethics</h2>
+        <p class="topic-description">
+          Teachings on moral excellence and character
+        </p>
+      </div>
+    </div>
+
+    <!-- Hadith Options Section -->
+    <section id="hadith-options" class="hidden">
+      <div class="section-header">
+        <button class="back-button" onclick="showMainPage()">← Back to Topics</button>
+        <h2 id="options-title">Select a Hadith</h2>
+      </div>
+      <div class="hadith-options-grid"></div>
+    </section>
+
+    <!-- Hadith Detail Section -->
+    <section id="hadith-detail" class="hidden">
+      <div class="section-header">
+        <button class="back-button" onclick="showHadithOptions(currentCategory)">← Back to Options</button>
+        <h2 id="hadith-title">Hadith Title</h2>
+      </div>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+      <div class="wudhu-steps" id="steps-container"></div>
+      <div class="navigation-controls">
+        <button class="nav-btn prev" onclick="previousStep()">Previous</button>
+        <button class="nav-btn next" onclick="nextStep()">Next</button>
+      </div>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
