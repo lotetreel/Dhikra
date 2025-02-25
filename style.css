@@ -151,14 +151,14 @@ body {
 #hadith-detail {
   position: relative;
   height: auto;
-  padding-top: 1rem;
+  padding-top: 0;
 }
 
 .wudhu-steps {
   position: relative;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   height: auto;
-  min-height: 400px;
+  min-height: auto;
   touch-action: pan-y;
 }
 
@@ -259,9 +259,9 @@ body {
 }
 
 .progress-bar {
-  height: 4px;
+  height: 3px;
   background: rgba(255, 255, 255, 0.1);
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 0.8rem 0;
   border-radius: 3px;
   position: sticky;
   top: 0;
@@ -344,15 +344,11 @@ body {
   .nav-btn {
     padding: 0.6rem 1.2rem;
   }
-  
-  .wudhu-steps {
-    min-height: 300px;
-  }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 1rem;
+    padding: 0.8rem;
   }
 
   .topic-card {
@@ -361,7 +357,7 @@ body {
   
   .wudhu-step {
     padding: 1rem;
-    margin-bottom: 4rem;
+    margin-bottom: 0;
   }
   
   .arabic {
@@ -369,7 +365,7 @@ body {
     font-size: var(--arabic-font-size, 1.5rem);
     line-height: 1.6;
     padding-right: 0.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   .translation {
@@ -377,6 +373,7 @@ body {
     font-size: var(--english-font-size, 0.95rem);
     line-height: 1.5;
     padding-left: 0.8rem;
+    margin-bottom: 0;
   }
   
   .arabic::after, .translation::after {
@@ -389,8 +386,28 @@ body {
   }
   
   .step-number {
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  #hadith-title {
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+  }
+  
+  .back-button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .navigation-controls {
+    padding: 0.7rem;
+  }
+  
+  .nav-btn {
+    min-height: 40px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -464,8 +481,8 @@ body {
 /* Settings Button Styles */
 .settings-container {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0.5rem;
+  right: 0.5rem;
   z-index: 300;
   transition: all 0.3s ease;
 }
@@ -589,6 +606,17 @@ body {
   animation: spin 0.5s ease-out forwards;
 }
 
+/* Hide hadith detail header on mobile */
+@media (max-width: 768px) {
+  #hadith-detail .header {
+    display: none;
+  }
+  
+  .section-header {
+    margin-bottom: 0.8rem;
+  }
+}
+
 /* Portrait mode - hide side navigation completely */
 @media (orientation: portrait) {
   .side-navigation {
@@ -641,14 +669,6 @@ body {
       justify-content: center;
     }
     
-    .wudhu-steps {
-      min-height: calc(100vh - 200px);
-    }
-    
-    #steps-container {
-      margin-bottom: 4rem;
-    }
-    
     /* Adjust settings panel for small screens */
     .settings-panel {
       width: 180px;
@@ -696,6 +716,56 @@ body {
     background: rgba(22, 33, 62, 0.7);
   }
   
+  /* Remove fixed heights to prevent scrolling */
+  .wudhu-steps {
+    min-height: auto;
+    height: auto;
+  }
+  
+  /* Adjust the hadith container to fit viewport height */
+  #hadith-detail {
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Make content area take available space */
+  .wudhu-steps {
+    flex: 1;
+    overflow: auto;
+  }
+  
+  /* More compact text in landscape */
+  .arabic {
+    font-size: calc(var(--arabic-font-size, 1.8rem) * 0.9);
+    line-height: 1.5;
+  }
+  
+  .translation {
+    font-size: calc(var(--english-font-size, 1rem) * 0.9);
+    line-height: 1.4;
+  }
+  
+  @media (max-height: 450px) {
+    #hadith-title {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    
+    .section-header {
+      margin-bottom: 0.3rem;
+    }
+    
+    /* Ultra compact mode for very short screens */
+    .wudhu-step {
+      padding: 0.5rem 60px;
+    }
+    
+    .progress-bar {
+      margin-bottom: 0.3rem;
+    }
+  }
+  
   @media (max-height: 500px) {
     .wudhu-step {
       padding-left: 70px;
@@ -705,10 +775,6 @@ body {
     .nav-arrow {
       width: 70px;
       background: rgba(22, 33, 62, 0.5);
-    }
-    
-    .wudhu-steps {
-      min-height: 200px;
     }
   }
 }

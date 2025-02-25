@@ -90,10 +90,13 @@ function loadHadithDetail(hadithId, category) {
   stepsContainer.innerHTML = '';
   document.getElementById('hadith-title').textContent = hadith.title;
 
+  // Simplify step UI for better mobile performance
   hadith.steps.forEach((step, index) => {
     const stepDiv = document.createElement('div');
     stepDiv.className = 'wudhu-step' + (index === 0 ? ' active' : '');
     stepDiv.setAttribute('data-step', index + 1);
+    
+    // More compact structure
     stepDiv.innerHTML = `
       <div class="step-number">${index + 1}</div>
       <div class="step-text">
@@ -108,22 +111,24 @@ function loadHadithDetail(hadithId, category) {
   totalSteps = hadith.steps.length;
   updateProgress();
   updateButtonState();
-  updateNavigationUI();
   
-  // Remove old settings container if it exists
+  // Remove old settings container if exists
   const oldSettings = document.querySelector('.settings-container');
   if (oldSettings) {
     oldSettings.remove();
   }
   
-  // Create new settings button
+  // Create settings button
   setupSettingsButton();
 
   document.querySelector('.topics-grid').classList.add('hidden');
   document.getElementById('hadith-options').classList.add('hidden');
   document.getElementById('hadith-detail').classList.remove('hidden');
   
-  // Remove the old text controls section
+  // Dynamic size adjustments
+  updateNavigationUI();
+  
+  // Remove text controls if they exist
   const textControls = document.querySelector('.text-controls');
   if (textControls) {
     textControls.remove();
@@ -145,6 +150,9 @@ function nextStep() {
       updateButtonState();
       updateNavigationUI();
       vibrate();
+      
+      // Adjust content height after step change
+      adjustContentHeight();
     }, 100);
   }
 }
@@ -163,6 +171,9 @@ function previousStep() {
       updateButtonState();
       updateNavigationUI();
       vibrate();
+      
+      // Adjust content height after step change
+      adjustContentHeight();
     }, 100);
   }
 }
@@ -260,7 +271,57 @@ function createSideNavigation() {
   activeStep.appendChild(sideNav);
 }
 
-// Show or hide navigation elements based on orientation
+// Dynamically adjust content height
+function adjustContentHeight() {
+  // Get all relevant elements
+  const detailSection = document.getElementById('hadith-detail');
+  const stepsContainer = document.getElementById('steps-container');
+  const sectionHeader = document.querySelector('.section-header');
+  const progressBar = document.querySelector('.progress-bar');
+  const navControls = document.querySelector('.navigation-controls');
+  
+  if (!detailSection.classList.contains('hidden')) {
+    // For landscape orientation
+    if (!isPortraitMode) {
+      // Calculate available height
+      const viewportHeight = window.innerHeight;
+      const headerHeight = sectionHeader ? sectionHeader.offsetHeight : 0;
+      const progressHeight = progressBar ? progressBar.offsetHeight : 0;
+      
+      // Set steps container to fill available space without creating scroll
+      const availableHeight = viewportHeight - headerHeight - progressHeight - 20; // 20px for padding
+      
+      // Ensure active step is fully visible
+      const activeStep = document.querySelector('.wudhu-step.active');
+      if (activeStep) {
+        // Check if step content exceeds available height
+        if (activeStep.scrollHeight > availableHeight) {
+          // If content needs scrolling, make container match available height
+          stepsContainer.style.height = `${availableHeight}px`;
+          stepsContainer.style.overflow = 'auto';
+        } else {
+          // If content fits, use content height
+          stepsContainer.style.height = 'auto';
+          stepsContainer.style.overflow = 'visible';
+        }
+      }
+    } else {
+      // For portrait mode, handle bottom navigation
+      if (navControls) {
+        const navHeight = navControls.offsetHeight;
+        // Add padding to ensure content isn't hidden behind nav
+        stepsContainer.style.paddingBottom = `${navHeight + 10}px`;
+      }
+      
+      // Revert to auto height in portrait
+      stepsContainer.style.height = 'auto';
+      stepsContainer.style.minHeight = 'auto';
+      stepsContainer.style.overflow = 'visible';
+    }
+  }
+}
+
+// Update navigation UI based on orientation
 function updateNavigationUI() {
   // First get current orientation
   isPortraitMode = window.innerHeight > window.innerWidth;
@@ -273,6 +334,9 @@ function updateNavigationUI() {
   if (navControls) {
     navControls.style.display = isPortraitMode ? 'flex' : 'none';
   }
+  
+  // Calculate and set content height
+  adjustContentHeight();
   
   // Handle side navigation
   if (isPortraitMode) {
@@ -385,8 +449,15 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.toggle('landscape-mode', !isPortraitMode);
   
   // Add orientation change detection
-  window.addEventListener('resize', handleOrientationChange);
-  window.addEventListener('orientationchange', handleOrientationChange);
+  window.addEventListener('resize', function() {
+    updateNavigationUI();
+    adjustContentHeight();
+  });
+  
+  window.addEventListener('orientationchange', function() {
+    updateNavigationUI();
+    setTimeout(adjustContentHeight, 100); // Slight delay to ensure accurate calculations
+  });
   
   // Save preferences when user leaves the page
   window.addEventListener('beforeunload', saveFontPreferences);
