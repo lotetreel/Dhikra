@@ -57,6 +57,10 @@ function showMainPage() {
   
   // Show the header on main page
   document.querySelector('.header').style.display = 'block';
+  
+  // Remove background pattern if exists
+  const pattern = document.querySelector('.background-pattern');
+  if (pattern) pattern.remove();
 }
 
 // Show the options page for a selected category
@@ -69,14 +73,33 @@ function showHadithOptions(category) {
     ? 'Select a Wudhu Narration'
     : 'Select a Supplication';
 
-  Object.entries(hadithData[category]).forEach(([id, data]) => {
+  // Get appropriate icon for category
+  const categoryIcon = category === 'wudhu' ? '💦' : '📜';
+
+  // Add decorative background pattern
+  const existingPattern = document.querySelector('.background-pattern');
+  if (!existingPattern) {
+    const patternContainer = document.createElement('div');
+    patternContainer.className = 'background-pattern';
+    document.getElementById('hadith-options').appendChild(patternContainer);
+  }
+  
+  // Create cards with enhanced styling
+  Object.entries(hadithData[category]).forEach(([id, data], index) => {
+    // Get a custom icon based on the hadith/supplication title
+    let cardIcon = getCardIcon(data.title);
+    
     const card = document.createElement('div');
     card.className = 'hadith-option-card';
+    card.style.animationDelay = `${index * 0.1}s`; // Stagger animation
     card.onclick = () => loadHadithDetail(id, category);
+    
     card.innerHTML = `
       <h3>${data.title}</h3>
-      <p>${data.summary ? `<p>${data.summary}</p>` : ''}</p>
+      <p>${data.summary || ''}</p>
+      <div class="card-icon">${cardIcon}</div>
     `;
+    
     optionsGrid.appendChild(card);
   });
 
@@ -86,6 +109,62 @@ function showHadithOptions(category) {
   document.querySelector('.topics-grid').classList.add('hidden');
   document.getElementById('hadith-options').classList.remove('hidden');
   document.getElementById('hadith-detail').classList.add('hidden');
+  
+  // Add subtle scroll indicator if there are many items
+  if (Object.keys(hadithData[category]).length > 3) {
+    addScrollIndicator();
+  }
+}
+
+// Function to get appropriate icon based on title
+function getCardIcon(title) {
+  // Default icons
+  const icons = {
+    'default': '🤲',
+    'wudhu': '💦',
+    'prayer': '📿',
+    'supplication': '📜',
+    'confession': '🔄',
+    'forgiveness': '✨',
+    'blessing': '🌟',
+    'mercy': '🌈',
+    'protection': '🛡️'
+  };
+  
+  // Check title for keywords
+  const titleLower = title.toLowerCase();
+  
+  if (titleLower.includes('وضوء') || titleLower.includes('wudhu')) return icons['wudhu'];
+  if (titleLower.includes('صلاة') || titleLower.includes('prayer')) return icons['prayer'];
+  if (titleLower.includes('دعاء') || titleLower.includes('supplication')) return icons['supplication'];
+  if (titleLower.includes('توبة') || titleLower.includes('confession')) return icons['confession'];
+  if (titleLower.includes('مغفرة') || titleLower.includes('forgiveness')) return icons['forgiveness'];
+  if (titleLower.includes('بركة') || titleLower.includes('blessing')) return icons['blessing'];
+  if (titleLower.includes('رحمة') || titleLower.includes('mercy')) return icons['mercy'];
+  if (titleLower.includes('حماية') || titleLower.includes('protection')) return icons['protection'];
+  
+  return icons['default'];
+}
+
+// Add a subtle scroll indicator if there are multiple items
+function addScrollIndicator() {
+  const existingIndicator = document.querySelector('.scroll-indicator');
+  if (existingIndicator) existingIndicator.remove();
+  
+  const indicator = document.createElement('div');
+  indicator.className = 'scroll-indicator';
+  indicator.innerHTML = '<div class="indicator-dot"></div>';
+  
+  document.getElementById('hadith-options').appendChild(indicator);
+  
+  // Hide indicator after scrolling
+  const optionsGrid = document.querySelector('.hadith-options-grid');
+  optionsGrid.addEventListener('scroll', () => {
+    indicator.classList.add('hiding');
+    setTimeout(() => {
+      indicator.remove();
+    }, 700);
+  });
 }
 
 // Load and display the detailed view of a hadith/supplication
