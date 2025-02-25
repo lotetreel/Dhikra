@@ -3,6 +3,8 @@ let hadithData = {};  // Will be populated from data/data.json
 let currentStep = 1;
 let totalSteps = 0;
 let currentCategory = '';
+let arabicFontSize = 1.8; // Default size in rem
+let englishFontSize = 1.0; // Default size in rem
 
 // Fetch the hadith data from the JSON file
 function loadHadithData() {
@@ -30,19 +32,146 @@ function setupTopicCards() {
 // Set up swipe gestures for navigating steps
 function setupSwipeGestures() {
   let touchStartX = 0;
+  let touchStartY = 0;
+  let initialX = 0;
+  let initialY = 0;
   const swipeThreshold = 50;
   const stepsContainer = document.getElementById('steps-container');
+  let currentSwipeElement = null;
+  let swipeInProgress = false;
 
   stepsContainer.addEventListener('touchstart', e => {
     touchStartX = e.touches[0].clientX;
-  });
+    touchStartY = e.touches[0].clientY;
+    currentSwipeElement = document.querySelector(`.wudhu-step[data-step="${currentStep}"]`);
+    initialX = 0;
+    swipeInProgress = true;
+    
+    // Add transition class for smooth movements during swipe
+    if (currentSwipeElement) {
+      currentSwipeElement.classList.add('swiping');
+    }
+    
+    // Prevent default to avoid scrolling while swiping
+    e.preventDefault();
+  }, { passive: false });
+
+  stepsContainer.addEventListener('touchmove', e => {
+    if (!swipeInProgress || !currentSwipeElement) return;
+    
+    const touchX = e.touches[0].clientX;
+    const deltaX = touchX - touchStartX;
+    
+    // Only apply horizontal transform during swipe
+    // Limit the swipe distance for better control
+    const maxSwipe = window.innerWidth * 0.4; // 40% of screen width
+    const limitedDelta = Math.max(Math.min(deltaX, maxSwipe), -maxSwipe);
+    
+    // Apply the transform to create a visual feedback during swipe
+    currentSwipeElement.style.transform = `translateX(${limitedDelta}px)`;
+    
+    // Determine which other element to show (next or previous)
+    if (deltaX < -20 && currentStep < totalSteps) {
+      // Show a peek of the next element when swiping left
+      const nextElement = document.querySelector(`.wudhu-step[data-step="${currentStep + 1}"]`);
+      if (nextElement) {
+        nextElement.classList.add('peek-next');
+        nextElement.style.transform = `translateX(${window.innerWidth + limitedDelta}px)`;
+      }
+    } else if (deltaX > 20 && currentStep > 1) {
+      // Show a peek of the previous element when swiping right
+      const prevElement = document.querySelector(`.wudhu-step[data-step="${currentStep - 1}"]`);
+      if (prevElement) {
+        prevElement.classList.add('peek-prev');
+        prevElement.style.transform = `translateX(${limitedDelta - window.innerWidth}px)`;
+      }
+    }
+    
+    // Prevent default to avoid scrolling during swipe
+    e.preventDefault();
+  }, { passive: false });
 
   stepsContainer.addEventListener('touchend', e => {
+    if (!swipeInProgress || !currentSwipeElement) return;
+    
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartX;
+    
+    // Clean up any elements we were animating
+    document.querySelectorAll('.peek-next, .peek-prev').forEach(el => {
+      el.classList.remove('peek-next', 'peek-prev');
+      el.style.transform = '';
+    });
+    
+    // Reset the current element's transform
+    currentSwipeElement.style.transform = '';
+    currentSwipeElement.classList.remove('swiping');
+    
+    // If swipe is significant enough, navigate
     if (Math.abs(deltaX) > swipeThreshold) {
-      deltaX > 0 ? previousStep() : nextStep();
+      if (deltaX > 0 && currentStep > 1) {
+        previousStep();
+      } else if (deltaX < 0 && currentStep < totalSteps) {
+        nextStep();
+      }
     }
+    
+    swipeInProgress = false;
+  });
+
+  // Add swipe hint indicators
+  addSwipeIndicators();
+}
+
+// Add visual indicators for swipe functionality
+function addSwipeIndicators() {
+  const detailSection = document.getElementById('hadith-detail');
+  
+  // Create swipe indicators container
+  const indicatorsContainer = document.createElement('div');
+  indicatorsContainer.className = 'swipe-indicators';
+  
+  // Left indicator
+  const leftIndicator = document.createElement('div');
+  leftIndicator.className = 'swipe-indicator left';
+  leftIndicator.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>';
+  
+  // Right indicator
+  const rightIndicator = document.createElement('div');
+  rightIndicator.className = 'swipe-indicator right';
+  rightIndicator.innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>';
+  
+  // Add indicators to container
+  indicatorsContainer.appendChild(leftIndicator);
+  indicatorsContainer.appendChild(rightIndicator);
+  
+  // Insert before navigation controls
+  const navControls = detailSection.querySelector('.navigation-controls');
+  detailSection.insertBefore(indicatorsContainer, navControls);
+  
+  // Update indicator states when step changes
+  function updateIndicators() {
+    leftIndicator.classList.toggle('disabled', currentStep <= 1);
+    rightIndicator.classList.toggle('disabled', currentStep >= totalSteps);
+  }
+  
+  // Initial update
+  updateIndicators();
+  
+  // Add listeners to navigation events
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        if (mutation.target.classList.contains('active')) {
+          updateIndicators();
+        }
+      }
+    });
+  });
+  
+  // Observe all step elements
+  document.querySelectorAll('.wudhu-step').forEach(step => {
+    observer.observe(step, { attributes: true });
   });
 }
 
@@ -114,23 +243,35 @@ function loadHadithDetail(hadithId, category) {
 // Navigation functions
 function nextStep() {
   if (currentStep < totalSteps) {
-    document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-    currentStep++;
-    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
-    updateProgress();
-    updateButtonState();
-    vibrate();
+    const currentStepElement = document.querySelector(`[data-step="${currentStep}"]`);
+    currentStepElement.classList.add('prev-step');
+    currentStepElement.classList.remove('active');
+    
+    // Small delay for animations to be visible
+    setTimeout(() => {
+      currentStep++;
+      document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
+      updateProgress();
+      updateButtonState();
+      vibrate();
+    }, 100);
   }
 }
 
 function previousStep() {
   if (currentStep > 1) {
     document.querySelector(`[data-step="${currentStep}"]`).classList.remove('active');
-    currentStep--;
-    document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
-    updateProgress();
-    updateButtonState();
-    vibrate();
+    
+    // Small delay for animations to be visible
+    setTimeout(() => {
+      currentStep--;
+      const prevStepElement = document.querySelector(`[data-step="${currentStep}"]`);
+      prevStepElement.classList.remove('prev-step');
+      prevStepElement.classList.add('active');
+      updateProgress();
+      updateButtonState();
+      vibrate();
+    }, 100);
   }
 }
 
@@ -153,8 +294,73 @@ function vibrate() {
   }
 }
 
+// Update font sizes
+function updateFontSizes() {
+  document.documentElement.style.setProperty('--arabic-font-size', `${arabicFontSize}rem`);
+  document.documentElement.style.setProperty('--english-font-size', `${englishFontSize}rem`);
+}
+
+// Function to set up font size controls
+function setupFontControls() {
+  // Initialize with default sizes
+  updateFontSizes();
+  
+  // Arabic font size controls
+  document.getElementById('arabic-increase').addEventListener('click', () => {
+    arabicFontSize = Math.min(arabicFontSize + 0.2, 3.0); // Max size 3rem
+    updateFontSizes();
+    vibrate();
+  });
+  
+  document.getElementById('arabic-decrease').addEventListener('click', () => {
+    arabicFontSize = Math.max(arabicFontSize - 0.2, 1.0); // Min size 1rem
+    updateFontSizes();
+    vibrate();
+  });
+  
+  // English font size controls
+  document.getElementById('english-increase').addEventListener('click', () => {
+    englishFontSize = Math.min(englishFontSize + 0.1, 1.8); // Max size 1.8rem
+    updateFontSizes();
+    vibrate();
+  });
+  
+  document.getElementById('english-decrease').addEventListener('click', () => {
+    englishFontSize = Math.max(englishFontSize - 0.1, 0.8); // Min size 0.8rem
+    updateFontSizes();
+    vibrate();
+  });
+}
+
+// Save font size preferences to localStorage
+function saveFontPreferences() {
+  localStorage.setItem('arabicFontSize', arabicFontSize);
+  localStorage.setItem('englishFontSize', englishFontSize);
+}
+
+// Load font size preferences from localStorage
+function loadFontPreferences() {
+  const savedArabicSize = localStorage.getItem('arabicFontSize');
+  const savedEnglishSize = localStorage.getItem('englishFontSize');
+  
+  if (savedArabicSize) {
+    arabicFontSize = parseFloat(savedArabicSize);
+  }
+  
+  if (savedEnglishSize) {
+    englishFontSize = parseFloat(savedEnglishSize);
+  }
+  
+  updateFontSizes();
+}
+
 // Initialization when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   loadHadithData();
   setupSwipeGestures();
+  setupFontControls();
+  loadFontPreferences();
+  
+  // Save preferences when user leaves the page
+  window.addEventListener('beforeunload', saveFontPreferences);
 });
