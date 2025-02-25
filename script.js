@@ -5,6 +5,7 @@ let totalSteps = 0;
 let currentCategory = '';
 let arabicFontSize = 1.8; // Default size in rem
 let englishFontSize = 1.0; // Default size in rem
+let showTransliteration = false; // Default transliteration setting
 let isPortraitMode = window.innerHeight > window.innerWidth;
 
 // Fetch the hadith data from the JSON file
@@ -181,11 +182,12 @@ function loadHadithDetail(hadithId, category) {
     stepDiv.className = 'wudhu-step' + (index === 0 ? ' active' : '');
     stepDiv.setAttribute('data-step', index + 1);
     
-    // More compact structure
+    // Add structure with transliteration
     stepDiv.innerHTML = `
       <div class="step-number">${index + 1}</div>
       <div class="step-text">
         <p class="arabic">${step.arabic}</p>
+        <p class="transliteration" style="display: ${showTransliteration ? 'block' : 'none'}">${step.transliteration || 'Transliteration not available'}</p>
         <p class="translation">${step.translation}</p>
       </div>
     `;
@@ -291,16 +293,41 @@ function updateFontSizes() {
   document.documentElement.style.setProperty('--english-font-size', `${englishFontSize}rem`);
 }
 
+// Function to toggle transliteration
+function toggleTransliteration() {
+  showTransliteration = !showTransliteration;
+  updateTransliterationDisplay();
+  vibrate();
+  saveFontPreferences();
+}
+
+// Update the display based on transliteration preference
+function updateTransliterationDisplay() {
+  const transliterationElements = document.querySelectorAll('.transliteration');
+  
+  transliterationElements.forEach(element => {
+    element.style.display = showTransliteration ? 'block' : 'none';
+  });
+  
+  // Update the toggle switch appearance
+  const translitToggle = document.getElementById('transliteration-toggle');
+  if (translitToggle) {
+    translitToggle.checked = showTransliteration;
+  }
+}
+
 // Save font size preferences to localStorage
 function saveFontPreferences() {
   localStorage.setItem('arabicFontSize', arabicFontSize);
   localStorage.setItem('englishFontSize', englishFontSize);
+  localStorage.setItem('showTransliteration', showTransliteration);
 }
 
 // Load font size preferences from localStorage
 function loadFontPreferences() {
   const savedArabicSize = localStorage.getItem('arabicFontSize');
   const savedEnglishSize = localStorage.getItem('englishFontSize');
+  const savedTransliteration = localStorage.getItem('showTransliteration');
   
   if (savedArabicSize) {
     arabicFontSize = parseFloat(savedArabicSize);
@@ -308,6 +335,10 @@ function loadFontPreferences() {
   
   if (savedEnglishSize) {
     englishFontSize = parseFloat(savedEnglishSize);
+  }
+  
+  if (savedTransliteration !== null) {
+    showTransliteration = savedTransliteration === 'true';
   }
   
   updateFontSizes();
@@ -461,7 +492,7 @@ function setupSettingsButton() {
   
   // Create settings content
   settingsPanel.innerHTML = `
-    <h3 class="settings-title">Text Size Settings</h3>
+    <h3 class="settings-title">Text Settings</h3>
     <div class="font-control">
       <span>Arabic Size:</span>
       <div class="font-control-buttons">
@@ -475,6 +506,13 @@ function setupSettingsButton() {
         <button class="font-btn" id="english-decrease">-</button>
         <button class="font-btn" id="english-increase">+</button>
       </div>
+    </div>
+    <div class="toggle-control">
+      <span>Show Transliteration:</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="transliteration-toggle" ${showTransliteration ? 'checked' : ''}>
+        <span class="toggle-slider"></span>
+      </label>
     </div>
   `;
   
@@ -524,6 +562,9 @@ function setupSettingsButton() {
     updateFontSizes();
     vibrate();
   });
+  
+  // Add transliteration toggle event
+  document.getElementById('transliteration-toggle').addEventListener('change', toggleTransliteration);
 }
 
 // Initialization when the page loads
