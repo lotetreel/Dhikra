@@ -41,6 +41,12 @@ body {
   position: relative;
 }
 
+/* Hide the header on all pages except the main page */
+#hadith-options .header,
+#hadith-detail .header {
+  display: none;
+}
+
 .title {
   font-family: 'Amiri', serif;
   font-size: 1.8rem;
@@ -604,17 +610,6 @@ body {
 
 .settings-btn.active .settings-icon {
   animation: spin 0.5s ease-out forwards;
-}
-
-/* Hide hadith detail header on mobile */
-@media (max-width: 768px) {
-  #hadith-detail .header {
-    display: none;
-  }
-  
-  .section-header {
-    margin-bottom: 0.8rem;
-  }
 }
 
 /* Portrait mode - hide side navigation completely */

@@ -54,6 +54,9 @@ function showMainPage() {
   document.querySelector('.topics-grid').classList.remove('hidden');
   document.getElementById('hadith-options').classList.add('hidden');
   document.getElementById('hadith-detail').classList.add('hidden');
+  
+  // Show the header on main page
+  document.querySelector('.header').style.display = 'block';
 }
 
 // Show the options page for a selected category
