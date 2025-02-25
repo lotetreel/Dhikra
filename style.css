@@ -66,21 +66,36 @@ body {
 }
 
 .back-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(230, 175, 46, 0.1);
   border: 2px solid #e6af2e;
   color: #e6af2e;
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.back-button::before {
+  content: "";
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(230, 175, 46, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.back-button:hover::before {
+  transform: translateX(100%);
 }
 
 .back-button:hover {
-  background: rgba(230, 175, 46, 0.2);
   transform: translateX(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .topics-grid {
@@ -130,28 +145,260 @@ body {
   display: none !important;
 }
 
-.hadith-options-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+/* Enhanced Hadith Options Styling */
+#options-title {
+  font-family: 'Amiri', serif;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(45deg, #e6af2e, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
 }
 
+/* Section title with decorative elements */
+#hadith-options .section-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#hadith-options .section-header::before,
+#hadith-options .section-header::after {
+  content: "❖";
+  color: rgba(230, 175, 46, 0.3);
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Subtle background pattern */
+.background-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.03;
+  background-image: radial-gradient(#e6af2e 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+
+/* Create a more appealing grid layout */
+.hadith-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  padding: 0.5rem;
+}
+
+/* Enhanced card styling */
 .hadith-option-card {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 1.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(230, 175, 46, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
-.hadith-option-card:hover {
+/* Add decorative element to cards */
+.hadith-option-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at top right, rgba(230, 175, 46, 0.15), transparent 70%);
+  border-radius: 0 15px 0 100%;
+  z-index: 0;
+}
+
+/* Card hover effects */
+.hadith-option-card:hover, 
+.hadith-option-card:active {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(230, 175, 46, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Card title styling */
+.hadith-option-card h3 {
+  font-family: 'Amiri', serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.7rem;
+  color: #fff;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card description */
+.hadith-option-card p {
+  color: #a2a8d3;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* Add a subtle icon to each card */
+.hadith-option-card .card-icon {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  font-size: 2rem;
+  opacity: 0.2;
+  color: #e6af2e;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+.hadith-option-card:hover .card-icon {
+  opacity: 0.4;
+  transform: rotate(15deg);
+}
+
+/* Add a subtle indicator that the card is tappable */
+.hadith-option-card::after {
+  content: "↗";
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: #e6af2e;
+  font-size: 1rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.hadith-option-card:hover::after {
+  opacity: 0.7;
+  transform: translate(3px, -3px);
+}
+
+/* Scroll indicator for many items */
+.scroll-indicator {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 50px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  opacity: 0.7;
+  animation: fadeInOut 2s infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #e6af2e;
+  border-radius: 50%;
+  animation: bounce 1.5s infinite;
+}
+
+.scroll-indicator.hiding {
+  animation: fadeOut 0.7s forwards;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+/* Empty state styling */
+.empty-options {
+  text-align: center;
+  padding: 2rem;
+  color: #a2a8d3;
+  font-style: italic;
+}
+
+/* Islamic-inspired decorative corners for the options container */
+#hadith-options {
+  position: relative;
+}
+
+#hadith-options::before,
+#hadith-options::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  opacity: 0.15;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#hadith-options::before {
+  top: 70px;
+  left: 10px;
+  border-top: 2px solid #e6af2e;
+  border-left: 2px solid #e6af2e;
+  border-radius: 15px 0 0 0;
+}
+
+#hadith-options::after {
+  top: 70px;
+  right: 10px;
+  border-top: 2px solid #e6af2e;
+  border-right: 2px solid #e6af2e;
+  border-radius: 0 15px 0 0;
+}
+
+/* Improve focus states for accessibility */
+.hadith-option-card:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(230, 175, 46, 0.5);
+}
+
+/* Animation for cards as they appear */
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hadith-option-card {
+  animation: cardAppear 0.5s ease forwards;
+}
+
+/* Stagger animation for multiple cards */
+.hadith-option-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.hadith-option-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.hadith-option-card:nth-child(4) {
+  animation-delay: 0.3s;
 }
 
 #hadith-detail {
@@ -349,6 +596,15 @@ body {
   
   .nav-btn {
     padding: 0.6rem 1.2rem;
+  }
+  
+  .hadith-options-grid {
+    gap: 1rem;
+    padding: 0.3rem;
+  }
+  
+  .hadith-option-card {
+    padding: 1.2rem;
   }
 }
 
@@ -779,5 +1035,29 @@ body {
   .nav-btn {
     min-height: 48px;
     padding: 0.8rem 1.5rem;
+  }
+}
+
+/* Responsive adjustments for the options screen */
+@media (min-width: 768px) {
+  /* For tablets and larger, add a more sophisticated layout */
+  .hadith-options-grid {
+    padding: 1rem 2rem;
+  }
+  
+  .hadith-option-card {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+/* Night mode optimization */
+@media (prefers-color-scheme: dark) {
+  .hadith-option-card {
+    background: rgba(255, 255, 255, 0.07);
+  }
+  
+  .hadith-option-card:hover {
+    background: rgba(255, 255, 255, 0.12);
   }
 }
