@@ -5,6 +5,7 @@ let totalSteps = 0;
 let currentCategory = '';
 let arabicFontSize = 1.8; // Default size in rem
 let englishFontSize = 1.0; // Default size in rem
+let useSwipeNavigation = true; // Default navigation mode
 
 // Fetch the hadith data from the JSON file
 function loadHadithData() {
@@ -40,7 +41,10 @@ function setupSwipeGestures() {
   let currentSwipeElement = null;
   let swipeInProgress = false;
 
-  stepsContainer.addEventListener('touchstart', e => {
+  const swipeHandler = function(e) {
+    // Don't handle swipes if swipe navigation is disabled
+    if (!useSwipeNavigation) return;
+    
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
     currentSwipeElement = document.querySelector(`.wudhu-step[data-step="${currentStep}"]`);
@@ -54,10 +58,10 @@ function setupSwipeGestures() {
     
     // Prevent default to avoid scrolling while swiping
     e.preventDefault();
-  }, { passive: false });
+  };
 
-  stepsContainer.addEventListener('touchmove', e => {
-    if (!swipeInProgress || !currentSwipeElement) return;
+  const touchMoveHandler = function(e) {
+    if (!useSwipeNavigation || !swipeInProgress || !currentSwipeElement) return;
     
     const touchX = e.touches[0].clientX;
     const deltaX = touchX - touchStartX;
@@ -89,10 +93,10 @@ function setupSwipeGestures() {
     
     // Prevent default to avoid scrolling during swipe
     e.preventDefault();
-  }, { passive: false });
+  };
 
-  stepsContainer.addEventListener('touchend', e => {
-    if (!swipeInProgress || !currentSwipeElement) return;
+  const touchEndHandler = function(e) {
+    if (!useSwipeNavigation || !swipeInProgress || !currentSwipeElement) return;
     
     const touchEndX = e.changedTouches[0].clientX;
     const deltaX = touchEndX - touchStartX;
@@ -117,10 +121,12 @@ function setupSwipeGestures() {
     }
     
     swipeInProgress = false;
-  });
+  };
 
-  // Add swipe hint indicators
-  addSwipeIndicators();
+  // Attach event handlers
+  stepsContainer.addEventListener('touchstart', swipeHandler, { passive: false });
+  stepsContainer.addEventListener('touchmove', touchMoveHandler, { passive: false });
+  stepsContainer.addEventListener('touchend', touchEndHandler);
 }
 
 // Add visual indicators for swipe functionality
@@ -172,6 +178,85 @@ function addSwipeIndicators() {
   // Observe all step elements
   document.querySelectorAll('.wudhu-step').forEach(step => {
     observer.observe(step, { attributes: true });
+  });
+}
+
+// Set up navigation mode toggle
+function setupNavigationToggle() {
+  const navToggle = document.getElementById('nav-toggle');
+  const navButtons = document.querySelector('.navigation-controls');
+  const swipeIndicators = document.querySelector('.swipe-indicators');
+  
+  // Load saved preference
+  const savedNavMode = localStorage.getItem('useSwipeNavigation');
+  if (savedNavMode !== null) {
+    useSwipeNavigation = savedNavMode === 'true';
+    navToggle.checked = useSwipeNavigation;
+  }
+  
+  // Update UI based on current setting
+  updateNavigationMode();
+  
+  // Listen for changes
+  navToggle.addEventListener('change', function() {
+    useSwipeNavigation = this.checked;
+    updateNavigationMode();
+    localStorage.setItem('useSwipeNavigation', useSwipeNavigation);
+    vibrate();
+  });
+  
+  function updateNavigationMode() {
+    if (useSwipeNavigation) {
+      navButtons.classList.add('hidden');
+      if (swipeIndicators) swipeIndicators.classList.remove('hidden');
+    } else {
+      navButtons.classList.remove('hidden');
+      if (swipeIndicators) swipeIndicators.classList.add('hidden');
+    }
+  }
+}
+
+// Set up settings panel
+function setupSettingsPanel() {
+  const settingsBtn = document.getElementById('settings-toggle');
+  const settingsPanel = document.getElementById('settings-panel');
+  const closeBtn = document.getElementById('settings-close');
+  const arabicSizeDisplay = document.getElementById('arabic-size-display');
+  const englishSizeDisplay = document.getElementById('english-size-display');
+  
+  // Update size displays
+  function updateSizeDisplays() {
+    arabicSizeDisplay.textContent = arabicFontSize.toFixed(1);
+    englishSizeDisplay.textContent = englishFontSize.toFixed(1);
+  }
+  
+  // Initial update
+  updateSizeDisplays();
+  
+  // Toggle settings panel
+  settingsBtn.addEventListener('click', () => {
+    settingsPanel.classList.toggle('active');
+    updateSizeDisplays();
+    vibrate();
+  });
+  
+  // Close settings panel
+  closeBtn.addEventListener('click', () => {
+    settingsPanel.classList.remove('active');
+    vibrate();
+  });
+  
+  // Update displays when sizes change
+  document.getElementById('arabic-increase').addEventListener('click', updateSizeDisplays);
+  document.getElementById('arabic-decrease').addEventListener('click', updateSizeDisplays);
+  document.getElementById('english-increase').addEventListener('click', updateSizeDisplays);
+  document.getElementById('english-decrease').addEventListener('click', updateSizeDisplays);
+  
+  // Close panel when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!settingsPanel.contains(e.target) && e.target !== settingsBtn) {
+      settingsPanel.classList.remove('active');
+    }
   });
 }
 
@@ -234,6 +319,13 @@ function loadHadithDetail(hadithId, category) {
   totalSteps = hadith.steps.length;
   updateProgress();
   updateButtonState();
+  
+  // Add swipe indicators after loading content
+  if (document.querySelector('.swipe-indicators')) {
+    document.querySelector('.swipe-indicators').remove();
+  }
+  addSwipeIndicators();
+  setupNavigationToggle();
 
   document.querySelector('.topics-grid').classList.add('hidden');
   document.getElementById('hadith-options').classList.add('hidden');
@@ -360,7 +452,12 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSwipeGestures();
   setupFontControls();
   loadFontPreferences();
+  setupSettingsPanel();
+  setupNavigationToggle();
   
   // Save preferences when user leaves the page
-  window.addEventListener('beforeunload', saveFontPreferences);
+  window.addEventListener('beforeunload', () => {
+    saveFontPreferences();
+    localStorage.setItem('useSwipeNavigation', useSwipeNavigation);
+  });
 });
