@@ -80,6 +80,9 @@ function showHadithOptions(category) {
     optionsGrid.appendChild(card);
   });
 
+  // Hide the header
+  document.querySelector('.header').style.display = 'none';
+  
   document.querySelector('.topics-grid').classList.add('hidden');
   document.getElementById('hadith-options').classList.remove('hidden');
   document.getElementById('hadith-detail').classList.add('hidden');
@@ -124,6 +127,9 @@ function loadHadithDetail(hadithId, category) {
   // Create settings button
   setupSettingsButton();
 
+  // Hide the header
+  document.querySelector('.header').style.display = 'none';
+  
   document.querySelector('.topics-grid').classList.add('hidden');
   document.getElementById('hadith-options').classList.add('hidden');
   document.getElementById('hadith-detail').classList.remove('hidden');
