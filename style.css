@@ -485,6 +485,35 @@ body {
   border-radius: 2px;
 }
 
+/* Transliteration text styling */
+.transliteration {
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--transliteration-font-size, 1rem);
+  line-height: 1.6;
+  text-align: center;
+  color: #e6af2e;
+  margin: 0.8rem 0;
+  padding: 0.5rem;
+  border-top: 1px solid rgba(230, 175, 46, 0.2);
+  border-bottom: 1px solid rgba(230, 175, 46, 0.2);
+  background: rgba(230, 175, 46, 0.05);
+  border-radius: 8px;
+  font-style: italic;
+  max-width: 100%;
+  word-wrap: break-word;
+  transition: all 0.3s ease;
+}
+
+/* Add animation for transliteration appearance */
+.transliteration {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .translation {
   font-style: italic;
   color: #a2a8d3;
@@ -571,6 +600,72 @@ body {
   border-color: #666;
 }
 
+/* Toggle switch styling */
+.toggle-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.toggle-control span {
+  font-size: 0.9rem;
+  color: #a2a8d3;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: rgba(230, 175, 46, 0.6);
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #e6af2e;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+  background-color: #e6af2e;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1.5rem;
@@ -606,6 +701,12 @@ body {
   .hadith-option-card {
     padding: 1.2rem;
   }
+  
+  .transliteration {
+    font-size: var(--transliteration-font-size, 0.9rem);
+    padding: 0.4rem;
+    margin: 0.6rem 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -628,6 +729,13 @@ body {
     line-height: 1.6;
     padding-right: 0.8rem;
     margin-bottom: 0.5rem;
+  }
+  
+  .transliteration {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.3rem;
+    margin: 0.4rem 0;
   }
   
   .translation {
@@ -792,7 +900,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 210px;
+  width: 230px; /* Make settings panel wider for toggle */
   backdrop-filter: blur(10px);
   border: 1px solid rgba(230, 175, 46, 0.1);
   z-index: 301;
@@ -868,6 +976,11 @@ body {
   animation: spin 0.5s ease-out forwards;
 }
 
+/* Define a CSS variable for transliteration font size that can be adjusted later */
+:root {
+  --transliteration-font-size: 1rem;
+}
+
 /* Portrait mode - hide side navigation completely */
 @media (orientation: portrait) {
   .side-navigation {
@@ -922,7 +1035,7 @@ body {
     
     /* Adjust settings panel for small screens */
     .settings-panel {
-      width: 180px;
+      width: 200px;
       padding: 45px 0.8rem 0.8rem;
     }
     
@@ -938,6 +1051,24 @@ body {
     .settings-btn {
       width: 36px;
       height: 36px;
+    }
+    
+    .toggle-control {
+      padding: 0.4rem;
+    }
+    
+    .toggle-switch {
+      width: 46px;
+      height: 22px;
+    }
+    
+    .toggle-slider:before {
+      height: 14px;
+      width: 14px;
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(24px);
     }
   }
 }
@@ -990,6 +1121,10 @@ body {
   .arabic {
     font-size: calc(var(--arabic-font-size, 1.8rem) * 0.9);
     line-height: 1.5;
+  }
+  
+  .transliteration {
+    font-size: calc(var(--transliteration-font-size, 1rem) * 0.9);
   }
   
   .translation {
