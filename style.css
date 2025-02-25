@@ -318,57 +318,6 @@ body {
   border-color: #666;
 }
 
-/* Text Size Controls */
-.text-controls {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 1rem 0;
-  padding: 0.8rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
-  z-index: 100;
-  position: relative;
-}
-
-.font-control {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.font-control span {
-  font-size: 0.9rem;
-  color: #a2a8d3;
-}
-
-.font-btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(230, 175, 46, 0.1);
-  border: 1px solid #e6af2e;
-  color: #e6af2e;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  padding: 0;
-}
-
-.font-btn:hover {
-  background: #e6af2e;
-  color: #16213e;
-  transform: scale(1.1);
-}
-
-.font-btn:active {
-  transform: scale(0.95);
-}
-
 @media (max-width: 768px) {
   .container {
     padding: 1.5rem;
@@ -481,21 +430,6 @@ body {
   #steps-container {
     margin-bottom: 4rem;
   }
-  
-  .text-controls {
-    flex-direction: column;
-    gap: 0.8rem;
-    padding: 0.6rem;
-  }
-  
-  .font-control {
-    justify-content: center;
-  }
-  
-  .font-btn {
-    width: 36px;
-    height: 36px;
-  }
 }
 
 @media (max-width: 480px) and (orientation: landscape) {
@@ -526,5 +460,268 @@ body {
 @supports (padding: max(0px)) {
   .navigation-controls {
     padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Side Navigation Styles */
+.side-navigation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  pointer-events: none; /* This allows clicks to pass through to underlying elements */
+  z-index: 20;
+}
+
+.nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 100%;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  pointer-events: auto; /* Enables clicks on these specific elements */
+  user-select: none;
+}
+
+.nav-arrow:hover {
+  opacity: 1;
+  background: rgba(230, 175, 46, 0.1);
+}
+
+.nav-arrow.prev-arrow {
+  position: absolute;
+  left: 0;
+  border-radius: 15px 0 0 15px;
+}
+
+.nav-arrow.next-arrow {
+  position: absolute;
+  right: 0;
+  border-radius: 0 15px 15px 0;
+}
+
+.arrow-icon {
+  font-size: 2rem;
+  color: #e6af2e;
+  transition: transform 0.2s ease;
+}
+
+.prev-arrow:hover .arrow-icon {
+  transform: translateX(-5px);
+}
+
+.next-arrow:hover .arrow-icon {
+  transform: translateX(5px);
+}
+
+.nav-arrow.disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+/* Responsive adjustments for landscape */
+@media (orientation: landscape) {
+  .navigation-controls {
+    opacity: 0.4; /* Fade but don't hide completely for fallback */
+  }
+  
+  .nav-arrow {
+    width: 80px; /* Wider touch target in landscape */
+  }
+  
+  .side-navigation {
+    opacity: 0.8; /* Make slightly more visible in landscape */
+  }
+}
+
+/* For small screens in landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+  .wudhu-step {
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+  
+  .nav-arrow {
+    background: rgba(22, 33, 62, 0.7);
+  }
+}
+
+/* For portrait mode on phones, make side navigation subtle */
+@media (max-width: 480px) and (orientation: portrait) {
+  .nav-arrow {
+    width: 40px;
+    opacity: 0.4;
+  }
+  
+  .arrow-icon {
+    font-size: 1.5rem;
+  }
+}
+
+/* Add landscape-mode class for dynamic adjustments */
+body.landscape-mode .wudhu-step {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+
+/* Settings Button Styles */
+.settings-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 300;
+  transition: all 0.3s ease;
+}
+
+.settings-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(22, 33, 62, 0.7);
+  border: 2px solid rgba(230, 175, 46, 0.5);
+  color: #e6af2e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 302;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.settings-btn:hover {
+  background: rgba(22, 33, 62, 0.9);
+  transform: rotate(30deg);
+}
+
+.settings-btn:active {
+  transform: scale(0.95) rotate(30deg);
+}
+
+.settings-icon {
+  font-size: 20px;
+}
+
+.settings-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(22, 33, 62, 0.95);
+  border-radius: 15px;
+  padding: 50px 1rem 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-10px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 210px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(230, 175, 46, 0.1);
+  z-index: 301;
+}
+
+.settings-panel.active {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.settings-title {
+  font-size: 1rem;
+  color: #e6af2e;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.font-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.font-control span {
+  font-size: 0.9rem;
+  color: #a2a8d3;
+}
+
+.font-control-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.font-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(230, 175, 46, 0.1);
+  border: 1px solid #e6af2e;
+  color: #e6af2e;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.font-btn:hover {
+  background: #e6af2e;
+  color: #16213e;
+  transform: scale(1.1);
+}
+
+.font-btn:active {
+  transform: scale(0.95);
+}
+
+/* Media queries for settings panel */
+@media (max-width: 480px) {
+  .settings-panel {
+    width: 180px;
+    padding: 45px 0.8rem 0.8rem;
+  }
+  
+  .font-control {
+    padding: 0.4rem;
+  }
+  
+  .font-btn {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .settings-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Animation for cog icon when settings are active */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+.settings-btn.active .settings-icon {
+  animation: spin 0.5s ease-out forwards;
+}
+
+/* Completely hide bottom navigation in landscape mode */
+@media (orientation: landscape) {
+  .navigation-controls {
+    display: none;
   }
 }

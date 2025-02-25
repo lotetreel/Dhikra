@@ -107,10 +107,26 @@ function loadHadithDetail(hadithId, category) {
   totalSteps = hadith.steps.length;
   updateProgress();
   updateButtonState();
+  createSideNavigation();
+  
+  // Remove old settings container if it exists
+  const oldSettings = document.querySelector('.settings-container');
+  if (oldSettings) {
+    oldSettings.remove();
+  }
+  
+  // Create new settings button
+  setupSettingsButton();
 
   document.querySelector('.topics-grid').classList.add('hidden');
   document.getElementById('hadith-options').classList.add('hidden');
   document.getElementById('hadith-detail').classList.remove('hidden');
+  
+  // Remove the old text controls section
+  const textControls = document.querySelector('.text-controls');
+  if (textControls) {
+    textControls.remove();
+  }
 }
 
 // Navigation functions
@@ -127,6 +143,7 @@ function nextStep() {
       updateProgress();
       updateButtonState();
       vibrate();
+      createSideNavigation(); // Add side navigation to the new step
     }, 100);
   }
 }
@@ -144,6 +161,7 @@ function previousStep() {
       updateProgress();
       updateButtonState();
       vibrate();
+      createSideNavigation(); // Add side navigation to the new step
     }, 100);
   }
 }
@@ -173,38 +191,6 @@ function updateFontSizes() {
   document.documentElement.style.setProperty('--english-font-size', `${englishFontSize}rem`);
 }
 
-// Function to set up font size controls
-function setupFontControls() {
-  // Initialize with default sizes
-  updateFontSizes();
-  
-  // Arabic font size controls
-  document.getElementById('arabic-increase').addEventListener('click', () => {
-    arabicFontSize = Math.min(arabicFontSize + 0.2, 3.0); // Max size 3rem
-    updateFontSizes();
-    vibrate();
-  });
-  
-  document.getElementById('arabic-decrease').addEventListener('click', () => {
-    arabicFontSize = Math.max(arabicFontSize - 0.2, 1.0); // Min size 1rem
-    updateFontSizes();
-    vibrate();
-  });
-  
-  // English font size controls
-  document.getElementById('english-increase').addEventListener('click', () => {
-    englishFontSize = Math.min(englishFontSize + 0.1, 1.8); // Max size 1.8rem
-    updateFontSizes();
-    vibrate();
-  });
-  
-  document.getElementById('english-decrease').addEventListener('click', () => {
-    englishFontSize = Math.max(englishFontSize - 0.1, 0.8); // Min size 0.8rem
-    updateFontSizes();
-    vibrate();
-  });
-}
-
 // Save font size preferences to localStorage
 function saveFontPreferences() {
   localStorage.setItem('arabicFontSize', arabicFontSize);
@@ -227,12 +213,148 @@ function loadFontPreferences() {
   updateFontSizes();
 }
 
+// Function to create side navigation in each wudhu step
+function createSideNavigation() {
+  // Add side navigation to each active step
+  const activeStep = document.querySelector('.wudhu-step.active');
+  if (!activeStep) return;
+  
+  // Remove any existing side navigation
+  const existingNav = activeStep.querySelector('.side-navigation');
+  if (existingNav) {
+    existingNav.remove();
+  }
+  
+  // Create new side navigation
+  const sideNav = document.createElement('div');
+  sideNav.className = 'side-navigation';
+  
+  // Previous arrow
+  const prevArrow = document.createElement('div');
+  prevArrow.className = `nav-arrow prev-arrow ${currentStep === 1 ? 'disabled' : ''}`;
+  prevArrow.innerHTML = '<div class="arrow-icon">&#10094;</div>';
+  prevArrow.addEventListener('click', function() {
+    if (currentStep > 1) {
+      previousStep();
+    }
+  });
+  
+  // Next arrow
+  const nextArrow = document.createElement('div');
+  nextArrow.className = `nav-arrow next-arrow ${currentStep === totalSteps ? 'disabled' : ''}`;
+  nextArrow.innerHTML = '<div class="arrow-icon">&#10095;</div>';
+  nextArrow.addEventListener('click', function() {
+    if (currentStep < totalSteps) {
+      nextStep();
+    }
+  });
+  
+  sideNav.appendChild(prevArrow);
+  sideNav.appendChild(nextArrow);
+  activeStep.appendChild(sideNav);
+}
+
+// Detect orientation changes to optimize UI for landscape/portrait
+function handleOrientationChange() {
+  const isLandscape = window.innerWidth > window.innerHeight;
+  document.body.classList.toggle('landscape-mode', isLandscape);
+  
+  // Refresh side navigation
+  createSideNavigation();
+}
+
+// Function to create and set up the settings button
+function setupSettingsButton() {
+  // Create settings container
+  const settingsContainer = document.createElement('div');
+  settingsContainer.className = 'settings-container';
+  
+  // Create settings button
+  const settingsBtn = document.createElement('button');
+  settingsBtn.className = 'settings-btn';
+  settingsBtn.innerHTML = '<div class="settings-icon">⚙</div>';
+  settingsBtn.setAttribute('aria-label', 'Settings');
+  
+  // Create settings panel
+  const settingsPanel = document.createElement('div');
+  settingsPanel.className = 'settings-panel';
+  
+  // Create settings content
+  settingsPanel.innerHTML = `
+    <h3 class="settings-title">Text Size Settings</h3>
+    <div class="font-control">
+      <span>Arabic Size:</span>
+      <div class="font-control-buttons">
+        <button class="font-btn" id="arabic-decrease">-</button>
+        <button class="font-btn" id="arabic-increase">+</button>
+      </div>
+    </div>
+    <div class="font-control">
+      <span>English Size:</span>
+      <div class="font-control-buttons">
+        <button class="font-btn" id="english-decrease">-</button>
+        <button class="font-btn" id="english-increase">+</button>
+      </div>
+    </div>
+  `;
+  
+  // Add click event to toggle settings panel
+  settingsBtn.addEventListener('click', function() {
+    settingsPanel.classList.toggle('active');
+    settingsBtn.classList.toggle('active');
+  });
+  
+  // Close settings when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!settingsContainer.contains(event.target) && settingsPanel.classList.contains('active')) {
+      settingsPanel.classList.remove('active');
+      settingsBtn.classList.remove('active');
+    }
+  });
+  
+  // Add elements to the DOM
+  settingsContainer.appendChild(settingsPanel);
+  settingsContainer.appendChild(settingsBtn);
+  
+  // Add settings to hadith detail section
+  const hadithDetail = document.getElementById('hadith-detail');
+  hadithDetail.appendChild(settingsContainer);
+  
+  // Re-bind font size control events (since we've created new buttons)
+  document.getElementById('arabic-increase').addEventListener('click', () => {
+    arabicFontSize = Math.min(arabicFontSize + 0.2, 3.0);
+    updateFontSizes();
+    vibrate();
+  });
+  
+  document.getElementById('arabic-decrease').addEventListener('click', () => {
+    arabicFontSize = Math.max(arabicFontSize - 0.2, 1.0);
+    updateFontSizes();
+    vibrate();
+  });
+  
+  document.getElementById('english-increase').addEventListener('click', () => {
+    englishFontSize = Math.min(englishFontSize + 0.1, 1.8);
+    updateFontSizes();
+    vibrate();
+  });
+  
+  document.getElementById('english-decrease').addEventListener('click', () => {
+    englishFontSize = Math.max(englishFontSize - 0.1, 0.8);
+    updateFontSizes();
+    vibrate();
+  });
+}
+
 // Initialization when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   loadHadithData();
   setupSwipeGestures();
-  setupFontControls();
   loadFontPreferences();
+  
+  // Add orientation detection
+  window.addEventListener('resize', handleOrientationChange);
+  handleOrientationChange(); // Initial check
   
   // Save preferences when user leaves the page
   window.addEventListener('beforeunload', saveFontPreferences);
