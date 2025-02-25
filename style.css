@@ -392,69 +392,6 @@ body {
     font-size: 1.5rem;
     margin-bottom: 0.8rem;
   }
-  
-  .navigation-controls {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    border-radius: 1rem 1rem 0 0;
-    padding: 1rem;
-    background: rgba(22, 33, 62, 0.95);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-  }
-  
-  .nav-btn {
-    flex: 1;
-    min-height: 44px;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .wudhu-steps {
-    padding-bottom: calc(80px + env(safe-area-inset-bottom));
-    min-height: calc(100vh - 200px);
-  }
-  
-  #steps-container {
-    margin-bottom: 4rem;
-  }
-}
-
-@media (max-width: 480px) and (orientation: landscape) {
-  .arabic {
-    font-size: 1.6rem;
-    line-height: 1.4;
-  }
-  
-  .translation {
-    font-size: 0.95rem;
-  }
-  
-  .wudhu-steps {
-    min-height: 200px;
-  }
-  
-  .navigation-controls {
-    padding: 0.5rem;
-    flex-direction: row;
-    gap: 0.5rem;
-  }
-  
-  .nav-btn {
-    min-height: 48px;
-  }
 }
 
 @supports (padding: max(0px)) {
@@ -522,51 +459,6 @@ body {
 .nav-arrow.disabled {
   opacity: 0.2;
   cursor: not-allowed;
-}
-
-/* Responsive adjustments for landscape */
-@media (orientation: landscape) {
-  .navigation-controls {
-    opacity: 0.4; /* Fade but don't hide completely for fallback */
-  }
-  
-  .nav-arrow {
-    width: 80px; /* Wider touch target in landscape */
-  }
-  
-  .side-navigation {
-    opacity: 0.8; /* Make slightly more visible in landscape */
-  }
-}
-
-/* For small screens in landscape */
-@media (max-height: 500px) and (orientation: landscape) {
-  .wudhu-step {
-    padding-left: 70px;
-    padding-right: 70px;
-  }
-  
-  .nav-arrow {
-    background: rgba(22, 33, 62, 0.7);
-  }
-}
-
-/* For portrait mode on phones, make side navigation subtle */
-@media (max-width: 480px) and (orientation: portrait) {
-  .nav-arrow {
-    width: 40px;
-    opacity: 0.4;
-  }
-  
-  .arrow-icon {
-    font-size: 1.5rem;
-  }
-}
-
-/* Add landscape-mode class for dynamic adjustments */
-body.landscape-mode .wudhu-step {
-  padding-left: 60px;
-  padding-right: 60px;
 }
 
 /* Settings Button Styles */
@@ -687,28 +579,6 @@ body.landscape-mode .wudhu-step {
   transform: scale(0.95);
 }
 
-/* Media queries for settings panel */
-@media (max-width: 480px) {
-  .settings-panel {
-    width: 180px;
-    padding: 45px 0.8rem 0.8rem;
-  }
-  
-  .font-control {
-    padding: 0.4rem;
-  }
-  
-  .font-btn {
-    width: 28px;
-    height: 28px;
-  }
-  
-  .settings-btn {
-    width: 36px;
-    height: 36px;
-  }
-}
-
 /* Animation for cog icon when settings are active */
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -719,9 +589,134 @@ body.landscape-mode .wudhu-step {
   animation: spin 0.5s ease-out forwards;
 }
 
-/* Completely hide bottom navigation in landscape mode */
+/* Portrait mode - hide side navigation completely */
+@media (orientation: portrait) {
+  .side-navigation {
+    display: none !important;
+  }
+  
+  /* Ensure bottom navigation is visible in portrait */
+  .navigation-controls {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+    background: rgba(22, 33, 62, 0.95);
+    backdrop-filter: blur(10px);
+    justify-content: space-between;
+    gap: 1rem;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Improve readability in portrait mode */
+  .wudhu-step {
+    padding: 1rem 1.2rem;
+  }
+  
+  /* Add space at bottom for fixed navigation */
+  .wudhu-steps {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+  
+  /* Adjust step text padding */
+  .step-text {
+    padding: 0 0.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    .nav-btn {
+      flex: 1;
+      min-height: 44px;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .wudhu-steps {
+      min-height: calc(100vh - 200px);
+    }
+    
+    #steps-container {
+      margin-bottom: 4rem;
+    }
+    
+    /* Adjust settings panel for small screens */
+    .settings-panel {
+      width: 180px;
+      padding: 45px 0.8rem 0.8rem;
+    }
+    
+    .font-control {
+      padding: 0.4rem;
+    }
+    
+    .font-btn {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .settings-btn {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+
+/* Landscape mode - show side navigation, hide bottom navigation */
 @media (orientation: landscape) {
   .navigation-controls {
-    display: none;
+    display: none !important;
+  }
+  
+  .side-navigation {
+    display: flex !important;
+  }
+  
+  /* Add padding in landscape mode to prevent text overlap with arrows */
+  body.landscape-mode .wudhu-step {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  
+  .nav-arrow {
+    background: rgba(22, 33, 62, 0.4);
+    backdrop-filter: blur(3px);
+  }
+  
+  .nav-arrow:hover {
+    background: rgba(22, 33, 62, 0.7);
+  }
+  
+  @media (max-height: 500px) {
+    .wudhu-step {
+      padding-left: 70px;
+      padding-right: 70px;
+    }
+    
+    .nav-arrow {
+      width: 70px;
+      background: rgba(22, 33, 62, 0.5);
+    }
+    
+    .wudhu-steps {
+      min-height: 200px;
+    }
+  }
+}
+
+/* Add larger touch targets for mobile */
+@media (max-width: 767px) {
+  .nav-btn {
+    min-height: 48px;
+    padding: 0.8rem 1.5rem;
   }
 }

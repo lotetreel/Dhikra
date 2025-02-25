@@ -5,6 +5,7 @@ let totalSteps = 0;
 let currentCategory = '';
 let arabicFontSize = 1.8; // Default size in rem
 let englishFontSize = 1.0; // Default size in rem
+let isPortraitMode = window.innerHeight > window.innerWidth;
 
 // Fetch the hadith data from the JSON file
 function loadHadithData() {
@@ -107,7 +108,7 @@ function loadHadithDetail(hadithId, category) {
   totalSteps = hadith.steps.length;
   updateProgress();
   updateButtonState();
-  createSideNavigation();
+  updateNavigationUI();
   
   // Remove old settings container if it exists
   const oldSettings = document.querySelector('.settings-container');
@@ -142,8 +143,8 @@ function nextStep() {
       document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
       updateProgress();
       updateButtonState();
+      updateNavigationUI();
       vibrate();
-      createSideNavigation(); // Add side navigation to the new step
     }, 100);
   }
 }
@@ -160,8 +161,8 @@ function previousStep() {
       prevStepElement.classList.add('active');
       updateProgress();
       updateButtonState();
+      updateNavigationUI();
       vibrate();
-      createSideNavigation(); // Add side navigation to the new step
     }, 100);
   }
 }
@@ -213,8 +214,13 @@ function loadFontPreferences() {
   updateFontSizes();
 }
 
-// Function to create side navigation in each wudhu step
+// Create side navigation in each wudhu step based on device orientation
 function createSideNavigation() {
+  // Only add side navigation in landscape mode
+  if (isPortraitMode) {
+    return; // Skip creating side navigation in portrait mode
+  }
+  
   // Add side navigation to each active step
   const activeStep = document.querySelector('.wudhu-step.active');
   if (!activeStep) return;
@@ -254,13 +260,35 @@ function createSideNavigation() {
   activeStep.appendChild(sideNav);
 }
 
+// Show or hide navigation elements based on orientation
+function updateNavigationUI() {
+  // First get current orientation
+  isPortraitMode = window.innerHeight > window.innerWidth;
+  
+  // Update body class for CSS styles
+  document.body.classList.toggle('landscape-mode', !isPortraitMode);
+  
+  // Show or hide bottom navigation controls
+  const navControls = document.querySelector('.navigation-controls');
+  if (navControls) {
+    navControls.style.display = isPortraitMode ? 'flex' : 'none';
+  }
+  
+  // Handle side navigation
+  if (isPortraitMode) {
+    // In portrait mode, remove any existing side navigation
+    document.querySelectorAll('.side-navigation').forEach(nav => {
+      nav.remove();
+    });
+  } else {
+    // In landscape mode, add side navigation
+    createSideNavigation();
+  }
+}
+
 // Detect orientation changes to optimize UI for landscape/portrait
 function handleOrientationChange() {
-  const isLandscape = window.innerWidth > window.innerHeight;
-  document.body.classList.toggle('landscape-mode', isLandscape);
-  
-  // Refresh side navigation
-  createSideNavigation();
+  updateNavigationUI();
 }
 
 // Function to create and set up the settings button
@@ -352,9 +380,13 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSwipeGestures();
   loadFontPreferences();
   
-  // Add orientation detection
+  // Initial orientation detection
+  isPortraitMode = window.innerHeight > window.innerWidth;
+  document.body.classList.toggle('landscape-mode', !isPortraitMode);
+  
+  // Add orientation change detection
   window.addEventListener('resize', handleOrientationChange);
-  handleOrientationChange(); // Initial check
+  window.addEventListener('orientationchange', handleOrientationChange);
   
   // Save preferences when user leaves the page
   window.addEventListener('beforeunload', saveFontPreferences);
