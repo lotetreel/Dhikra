@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+:root {
+  --arabic-font-size: 1.8rem;
+  --english-font-size: 1rem;
+  --transliteration-font-size: 1rem;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460);
@@ -666,6 +672,13 @@ input:checked + .toggle-slider:before {
   background-color: #e6af2e;
 }
 
+/* Transliteration font control styling */
+.transliteration-font-control {
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  border-left: 2px solid rgba(230, 175, 46, 0.3);
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 1.5rem;
@@ -703,7 +716,7 @@ input:checked + .toggle-slider:before {
   }
   
   .transliteration {
-    font-size: var(--transliteration-font-size, 0.9rem);
+    font-size: calc(var(--transliteration-font-size) * 0.95);
     padding: 0.4rem;
     margin: 0.6rem 0;
   }
@@ -733,7 +746,7 @@ input:checked + .toggle-slider:before {
   
   .transliteration {
     width: 100%;
-    font-size: 0.85rem;
+    font-size: calc(var(--transliteration-font-size) * 0.95);
     padding: 0.3rem;
     margin: 0.4rem 0;
   }
@@ -974,11 +987,6 @@ input:checked + .toggle-slider:before {
 
 .settings-btn.active .settings-icon {
   animation: spin 0.5s ease-out forwards;
-}
-
-/* Define a CSS variable for transliteration font size that can be adjusted later */
-:root {
-  --transliteration-font-size: 1rem;
 }
 
 /* Portrait mode - hide side navigation completely */
