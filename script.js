@@ -5,6 +5,7 @@ let totalSteps = 0;
 let currentCategory = '';
 let arabicFontSize = 1.8; // Default size in rem
 let englishFontSize = 1.0; // Default size in rem
+let transliterationFontSize = 1.0; // Default size in rem
 let showTransliteration = false; // Default transliteration setting
 let isPortraitMode = window.innerHeight > window.innerWidth;
 
@@ -291,12 +292,14 @@ function vibrate() {
 function updateFontSizes() {
   document.documentElement.style.setProperty('--arabic-font-size', `${arabicFontSize}rem`);
   document.documentElement.style.setProperty('--english-font-size', `${englishFontSize}rem`);
+  document.documentElement.style.setProperty('--transliteration-font-size', `${transliterationFontSize}rem`);
 }
 
 // Function to toggle transliteration
 function toggleTransliteration() {
   showTransliteration = !showTransliteration;
   updateTransliterationDisplay();
+  updateTransliterationSizeControlVisibility();
   vibrate();
   saveFontPreferences();
 }
@@ -316,10 +319,19 @@ function updateTransliterationDisplay() {
   }
 }
 
+// Add a new function to update transliteration size control visibility
+function updateTransliterationSizeControlVisibility() {
+  const translitSizeControl = document.querySelector('.transliteration-font-control');
+  if (translitSizeControl) {
+    translitSizeControl.style.display = showTransliteration ? 'flex' : 'none';
+  }
+}
+
 // Save font size preferences to localStorage
 function saveFontPreferences() {
   localStorage.setItem('arabicFontSize', arabicFontSize);
   localStorage.setItem('englishFontSize', englishFontSize);
+  localStorage.setItem('transliterationFontSize', transliterationFontSize);
   localStorage.setItem('showTransliteration', showTransliteration);
 }
 
@@ -327,6 +339,7 @@ function saveFontPreferences() {
 function loadFontPreferences() {
   const savedArabicSize = localStorage.getItem('arabicFontSize');
   const savedEnglishSize = localStorage.getItem('englishFontSize');
+  const savedTransliterationSize = localStorage.getItem('transliterationFontSize');
   const savedTransliteration = localStorage.getItem('showTransliteration');
   
   if (savedArabicSize) {
@@ -335,6 +348,10 @@ function loadFontPreferences() {
   
   if (savedEnglishSize) {
     englishFontSize = parseFloat(savedEnglishSize);
+  }
+  
+  if (savedTransliterationSize) {
+    transliterationFontSize = parseFloat(savedTransliterationSize);
   }
   
   if (savedTransliteration !== null) {
@@ -507,6 +524,13 @@ function setupSettingsButton() {
         <button class="font-btn" id="english-increase">+</button>
       </div>
     </div>
+    <div class="font-control transliteration-font-control" style="display: ${showTransliteration ? 'flex' : 'none'}">
+      <span>Transliteration Size:</span>
+      <div class="font-control-buttons">
+        <button class="font-btn" id="transliteration-decrease">-</button>
+        <button class="font-btn" id="transliteration-increase">+</button>
+      </div>
+    </div>
     <div class="toggle-control">
       <span>Show Transliteration:</span>
       <label class="toggle-switch">
@@ -543,25 +567,48 @@ function setupSettingsButton() {
     arabicFontSize = Math.min(arabicFontSize + 0.2, 3.0);
     updateFontSizes();
     vibrate();
+    saveFontPreferences();
   });
   
   document.getElementById('arabic-decrease').addEventListener('click', () => {
     arabicFontSize = Math.max(arabicFontSize - 0.2, 1.0);
     updateFontSizes();
     vibrate();
+    saveFontPreferences();
   });
   
   document.getElementById('english-increase').addEventListener('click', () => {
     englishFontSize = Math.min(englishFontSize + 0.1, 1.8);
     updateFontSizes();
     vibrate();
+    saveFontPreferences();
   });
   
   document.getElementById('english-decrease').addEventListener('click', () => {
     englishFontSize = Math.max(englishFontSize - 0.1, 0.8);
     updateFontSizes();
     vibrate();
+    saveFontPreferences();
   });
+  
+  // Add transliteration size control events
+  if (document.getElementById('transliteration-increase')) {
+    document.getElementById('transliteration-increase').addEventListener('click', () => {
+      transliterationFontSize = Math.min(transliterationFontSize + 0.1, 1.8);
+      updateFontSizes();
+      vibrate();
+      saveFontPreferences();
+    });
+  }
+  
+  if (document.getElementById('transliteration-decrease')) {
+    document.getElementById('transliteration-decrease').addEventListener('click', () => {
+      transliterationFontSize = Math.max(transliterationFontSize - 0.1, 0.8);
+      updateFontSizes();
+      vibrate();
+      saveFontPreferences();
+    });
+  }
   
   // Add transliteration toggle event
   document.getElementById('transliteration-toggle').addEventListener('change', toggleTransliteration);
