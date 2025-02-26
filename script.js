@@ -72,12 +72,20 @@ function showHadithOptions(category) {
   const optionsTitle = document.getElementById('options-title');
 
   optionsGrid.innerHTML = '';
+  
+  // Updated to include the new category
   optionsTitle.textContent = category === 'wudhu'
     ? 'Select a Wudhu Narration'
+    : category === 'upon_waking'
+    ? 'Select a Morning Supplication'
     : 'Select a Supplication';
 
-  // Get appropriate icon for category
-  const categoryIcon = category === 'wudhu' ? '🤲💧' : '📜';
+  // Get appropriate icon for category - updated for new category
+  const categoryIcon = category === 'wudhu' 
+    ? '🤲💧' 
+    : category === 'upon_waking'
+    ? '🌅'
+    : '📜';
 
   // Add decorative background pattern
   const existingPattern = document.querySelector('.background-pattern');
@@ -121,7 +129,7 @@ function showHadithOptions(category) {
 
 // Function to get appropriate icon based on title
 function getCardIcon(title) {
-  // Default icons
+  // Default icons - updated to include the upon_waking category
   const icons = {
     'default': '🤲',
     'wudhu': '🤲💧',
@@ -131,7 +139,8 @@ function getCardIcon(title) {
     'forgiveness': '✨',
     'blessing': '🌟',
     'mercy': '🌈',
-    'protection': '🛡️'
+    'protection': '🛡️',
+    'upon_waking': '🌅'
   };
   
   // Check title for keywords
@@ -145,6 +154,7 @@ function getCardIcon(title) {
   if (titleLower.includes('بركة') || titleLower.includes('blessing')) return icons['blessing'];
   if (titleLower.includes('رحمة') || titleLower.includes('mercy')) return icons['mercy'];
   if (titleLower.includes('حماية') || titleLower.includes('protection')) return icons['protection'];
+  if (titleLower.includes('استيقاظ') || titleLower.includes('upon waking') || titleLower.includes('morning') || titleLower.includes('صباح')) return icons['upon_waking'];
   
   return icons['default'];
 }

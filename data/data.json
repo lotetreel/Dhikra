@@ -1,4 +1,186 @@
 {
+  "upon_waking": {
+    "hadith1": {
+      "title": "عند الاستيقاظ | Upon Waking",
+      "summary": "Beautiful supplication taught by Imam Zayn al-Abidin for beginning each day",
+      "steps": [
+        {
+          "arabic": "قَالَ أَبُو عَبْدِ اَللَّهِ عَلَيْهِ اَلسَّلاَمُ",
+          "transliteration": "Qāla Abū 'Abdi llāhi 'alayhi s-salām",
+          "translation": "Abu Abdullah (Imam al-Sadiq, peace be upon him) said:",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        },
+        {
+          "arabic": "إِنَّ عَلِيَّ بْنَ اَلْحُسَيْنِ صَلَوَاتُ اَللَّهِ عَلَيْهِ",
+          "transliteration": "Inna 'Aliyya bna l-Ḥusayni ṣalawātu llāhi 'alayh",
+          "translation": "\"Verily, Ali ibn al-Husayn (prayers of Allah be upon him)",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        },
+        {
+          "arabic": "كَانَ إِذَا أَصْبَحَ قَالَ",
+          "transliteration": "Kāna idhā aṣbaḥa qāl",
+          "translation": "when morning came, would say:",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        },
+        {
+          "arabic": "أَبْتَدِئُ يَوْمِي هَذَا",
+          "transliteration": "Abtadi'u yawmī hādhā",
+          "translation": "'I begin this day",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        },
+        {
+          "arabic": "بَيْنَ يَدَيْ نِسْيَانِي وَ عَجَلَتِي",
+          "transliteration": "Bayna yaday nisyānī wa 'ajalatī",
+          "translation": "in the face of my forgetfulness and haste,",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        },
+        {
+          "arabic": "بِسْمِ اَللَّهِ وَ مَا شَاءَ اَللَّهُ",
+          "transliteration": "Bismi llāhi wa mā shā'a llāh",
+          "translation": "[with] \"In the name of Allah, and what Allah wills.\"",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        },
+        {
+          "arabic": "فَإِذَا فَعَلَ ذَلِكَ اَلْعَبْدُ",
+          "transliteration": "Fa-idhā fa'ala dhālika l-'abd",
+          "translation": "If a servant does this,",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        },
+        {
+          "arabic": "أَجْزَأَهُ مِمَّا نَسِيَ فِي يَوْمِهِ",
+          "transliteration": "Ajza'ahu mimmā nasiya fī yawmih\"",
+          "translation": "it suffices him for what he forgets during his day.'\"",
+          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
+        }
+      ]
+    },
+    "hadith2": {
+      "title": "دعاء الصباح | Morning Supplication",
+      "summary": "Powerful protection prayer taught by Imam Zayn al-Abidin for seeking divine shelter",
+      "steps": [
+        {
+          "arabic": "عَنْ أَبِي عَبْدِ اللَّهِ عَلَيْهِ السَّلَامُ قَالَ",
+          "transliteration": "ʿAn Abī ʿAbdillāhi ʿalayhi s-salāmu qāl",
+          "translation": "From Abu Abdullah (Imam al-Sadiq, peace be upon him), who said:",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "كَانَ عَلِيُّ بْنُ اَلْحُسَيْنِ عَلَيْهِمَا اَلسَّلاَمُ يَقُولُ",
+          "transliteration": "Kāna ʿAliyyu bnu l-Ḥusayni ʿalayhimā s-salāmu yaqūl",
+          "translation": "\"Ali ibn al-Husayn (peace be upon them both) used to say:",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "مَا أُبَالِي إِذَا قُلْتُ هَذِهِ اَلْكَلِمَاتِ",
+          "transliteration": "Mā ubālī idhā qultu hādhihi l-kalimāt",
+          "translation": "'I care not, when I utter these words,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "لَوِ اِجْتَمَعَ عَلَيَّ اَلْإِنْسُ وَ اَلْجِنُّ",
+          "transliteration": "Lawi jtamaʿa ʿalayya l-insu wa l-jinn",
+          "translation": "even if all humans and jinn were to gather against me:",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "بِسْمِ اَللَّهِ وَ بِاللَّهِ",
+          "transliteration": "Bismi llāhi wa billāh",
+          "translation": "\"In the name of Allah, and by Allah,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَمِنَ اَللَّهِ وَ إِلَى اَللَّهِ",
+          "transliteration": "Wa mina llāhi wa ilā llāh",
+          "translation": "and from Allah, and to Allah,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَفِي سَبِيلِ اَللَّهِ",
+          "transliteration": "Wa fī sabīli llāh",
+          "translation": "and in the path of Allah,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَعَلَى مِلَّةِ رَسُولِ اَللَّهِ",
+          "transliteration": "Wa ʿalā millati Rasūli llāh",
+          "translation": "and upon the creed of the Messenger of Allah,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "صَلَّى اَللَّهُ عَلَيْهِ وَ آلِهِ",
+          "transliteration": "Ṣallā llāhu ʿalayhi wa ālih",
+          "translation": "may Allah bless him and his family.",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "اَللَّهُمَّ إِلَيْكَ أَسْلَمْتُ نَفْسِي",
+          "transliteration": "Allāhumma ilayka aslamtu nafsī",
+          "translation": "O Allah, to You I submit myself,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَ إِلَيْكَ وَجَّهْتُ وَجْهِي",
+          "transliteration": "Wa ilayka wajjahtu wajhī",
+          "translation": "to You I turn my face,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَ إِلَيْكَ أَلْجَأْتُ ظَهْرِي",
+          "transliteration": "Wa ilayka alja'tu ẓahrī",
+          "translation": "to You I entrust my back,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَ إِلَيْكَ فَوَّضْتُ أَمْرِي",
+          "transliteration": "Wa ilayka fawwaḍtu amrī",
+          "translation": "and to You I surrender my affairs.",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "اَللَّهُمَّ اِحْفَظْنِي بِحِفْظِ اَلْإِيمَانِ",
+          "transliteration": "Allāhumma ḥfaẓnī bi-ḥifẓi l-īmān",
+          "translation": "O Allah, protect me with the protection of faith",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "مِنْ بَيْنِ يَدَيَّ وَ مِنْ خَلْفِي",
+          "transliteration": "Min bayni yadayya wa min khalfī",
+          "translation": "from before me and behind me,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَعَنْ يَمِينِي وَ عَنْ شِمَالِي",
+          "transliteration": "Wa ʿan yamīnī wa ʿan shimālī",
+          "translation": "from my right and my left,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَمِنْ فَوْقِي وَ مِنْ تَحْتِي",
+          "transliteration": "Wa min fawqī wa min taḥtī",
+          "translation": "from above me and below me,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَمِنْ قِبَلِي",
+          "transliteration": "Wa min qibalī",
+          "translation": "and from my front.",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "وَ اِدْفَعْ عَنِّي بِحَوْلِكَ وَ قُوَّتِكَ",
+          "transliteration": "Wa dfaʿ ʿannī bi-ḥawlika wa quwwatik",
+          "translation": "And repel [harm] from me by Your power and strength,",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        },
+        {
+          "arabic": "فَإِنَّهُ لاَ حَوْلَ وَ لاَ قُوَّةَ إِلاَّ بِكَ",
+          "transliteration": "Fa-innahu lā ḥawla wa lā quwwata illā bik\"'\"",
+          "translation": "for there is no power nor strength except through You.\"'\"",
+          "reference": "https://hadith.inoor.ir/ar/hadith/107281"
+        }
+      ]
+    }
+  },
   "wudhu": {
     "hadith1": {
       "title": "وضوء | The Beautiful Way of Wudhu",
@@ -81,62 +263,6 @@
           "transliteration": "Fa-idhā masaḥa bi-ra'sihi kharajati l-khaṭāyā min ra'sihi ḥattā takhruja min udhnayhi",
           "translation": "When he wipes his head, the sins depart from his head, even from his ears.",
           "reference": "https://al-kafi.org/chapter/wudhu/hadith/54321#5"
-        }
-      ]
-    }
-  },
-  "upon_waking": {
-    "hadith1": {
-      "title": "عند الاستيقاظ | Upon Waking",
-      "summary": "Beautiful supplication taught by Imam Zayn al-Abidin for beginning each day",
-      "steps": [
-        {
-          "arabic": "قَالَ أَبُو عَبْدِ اَللَّهِ عَلَيْهِ اَلسَّلاَمُ",
-          "transliteration": "Qāla Abū 'Abdi llāhi 'alayhi s-salām",
-          "translation": "Abu Abdullah (Imam al-Sadiq, peace be upon him) said:",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
-        },
-        {
-          "arabic": "إِنَّ عَلِيَّ بْنَ اَلْحُسَيْنِ صَلَوَاتُ اَللَّهِ عَلَيْهِ",
-          "transliteration": "Inna 'Aliyya bna l-Ḥusayni ṣalawātu llāhi 'alayh",
-          "translation": "\"Verily, Ali ibn al-Husayn (prayers of Allah be upon him)",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
-        },
-        {
-          "arabic": "كَانَ إِذَا أَصْبَحَ قَالَ",
-          "transliteration": "Kāna idhā aṣbaḥa qāl",
-          "translation": "when morning came, would say:",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
-        },
-        {
-          "arabic": "أَبْتَدِئُ يَوْمِي هَذَا",
-          "transliteration": "Abtadi'u yawmī hādhā",
-          "translation": "'I begin this day",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
-        },
-        {
-          "arabic": "بَيْنَ يَدَيْ نِسْيَانِي وَ عَجَلَتِي",
-          "transliteration": "Bayna yaday nisyānī wa 'ajalatī",
-          "translation": "in the face of my forgetfulness and haste,",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
-        },
-        {
-          "arabic": "بِسْمِ اَللَّهِ وَ مَا شَاءَ اَللَّهُ",
-          "transliteration": "Bismi llāhi wa mā shā'a llāh",
-          "translation": "[with] \"In the name of Allah, and what Allah wills.\"",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
-        },
-        {
-          "arabic": "فَإِذَا فَعَلَ ذَلِكَ اَلْعَبْدُ",
-          "transliteration": "Fa-idhā fa'ala dhālika l-'abd",
-          "translation": "If a servant does this,",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
-        },
-        {
-          "arabic": "أَجْزَأَهُ مِمَّا نَسِيَ فِي يَوْمِهِ",
-          "transliteration": "Ajza'ahu mimmā nasiya fī yawmih\"",
-          "translation": "it suffices him for what he forgets during his day.'\"",
-          "reference": "https://hadith.inoor.ir/fa/hadith/107178"
         }
       ]
     }
