@@ -179,93 +179,184 @@
           "reference": "https://hadith.inoor.ir/ar/hadith/107281"
         }
       ]
+    },
+    "hadith3": {
+  "title": "عند الاستيقاظ | Morning Fragrance",
+  "summary": "On the spiritual benefits of applying fragrance at the beginning of the day",
+  "steps": [
+    {
+      "arabic": "عَلِيُّ بْنُ إِبْرَاهِيمَ رَفَعَهُ إِلَى أَبِي عَبْدِ اَللَّهِ عَلَيْهِ اَلسَّلاَمُ قَالَ",
+      "transliteration": "ʿAliyyu bnu Ibrāhīma rafaʿahu ilā Abī ʿAbdillāhi ʿalayhi s-salāmu qāl",
+      "translation": "Ali ibn Ibrahim raised it (in narration) to Abu Abdullah (al-Sadiq, peace be upon him), who said:",
+      "reference": "https://hadith.inoor.ir/ar/hadith/116726"
+    },
+    {
+      "arabic": "مَنْ تَطَيَّبَ أَوَّلَ اَلنَّهَارِ",
+      "transliteration": "Man taṭayyaba awwala n-nahāri",
+      "translation": "\"Whoever applies fragrance at the beginning of the day,",
+      "reference": "https://hadith.inoor.ir/ar/hadith/116726"
+    },
+    {
+      "arabic": "لَمْ يَزَلْ عَقْلُهُ مَعَهُ إِلَى اَللَّيْلِ",
+      "transliteration": "Lam yazal ʿaqluhu maʿahu ilā l-layl\"",
+      "translation": "his intellect will remain with him until night.\"",
+      "reference": "https://hadith.inoor.ir/ar/hadith/116726"
+    },
+    {
+      "arabic": "وَ قَالَ قَالَ أَبُو عَبْدِ اَللَّهِ عَلَيْهِ اَلسَّلاَمُ",
+      "transliteration": "Wa qāla qāla Abū ʿAbdillāhi ʿalayhi s-salām",
+      "translation": "And he (the Imam) said:",
+      "reference": "https://hadith.inoor.ir/ar/hadith/116726"
+    },
+    {
+      "arabic": "صَلاَةُ مُتَطَيِّبٍ أَفْضَلُ",
+      "transliteration": "Ṣalātu mutaṭayyibin afḍalu",
+      "translation": "\"The prayer of one who uses fragrance is superior",
+      "reference": "https://hadith.inoor.ir/ar/hadith/116726"
+    },
+    {
+      "arabic": "مِنْ سَبْعِينَ صَلاَةً بِغَيْرِ طِيبٍ",
+      "transliteration": "Min sabʿīna ṣalātan bi-ghayri ṭīb\"",
+      "translation": "to seventy prayers without fragrance.\"",
+      "reference": "https://hadith.inoor.ir/ar/hadith/116726"
     }
+  ]
+}
   },
   "wudhu": {
     "hadith1": {
-      "title": "وضوء | The Beautiful Way of Wudhu",
-      "summary": "Demonstration of proper wudhu technique starting with intention and praise of water's purity",
-      "steps": [
-        {
-          "arabic": "بَيْنَا أَمِيرُ الْمُؤْمِنِينَ (عَلَيْهِ السَّلاَمُ) ذَاتَ يَوْمٍ جَالِساً مَعَ ابْنِ الْحَنَفِيَّةِ إِذْ قَالَ: يَا مُحَمَّدُ ائتِنِي بِإِنَاءٍ فِيهِ مَاءٌ أَتَوَضَّأْ لِلصَّلَاةِ",
-          "transliteration": "Baynā Amīr al-Mu'minīn ('alayhi s-salāmu) dhāta yawmin jālisan ma'a ibn al-Ḥanafiyyah idh qāl: Yā Muḥammad i'tinī bi-inā'in fīhi mā'un atawaḍḍa'u li ṣ-ṣalāh",
-          "translation": "While the Commander of the Faithful (peace be upon him) was sitting one day with Ibn al-Hanafiyyah, he said: 'O Muhammad, bring me a vessel with water so I may perform ablution for prayer.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/12345"
-        },
-        {
-          "arabic": "فَأتَاهُ مُحَمَّدٌ بِالْمَاءِ فَأَكْفَأَ بِيَدِهِ الْيُمْنَى عَلَى يَدِهِ الْيُسْرَى ثُمَّ قَالَ: بِسْمِ الله الْحَمْدُ للهِ الَّذِي جَعَلَ الْمَاءَ طَهُوراً وَلَمْ يَجْعَلْهُ نَجِساً",
-          "transliteration": "Fa-atāhu Muḥammadun bil-mā'i fa-akfa'a biyadihi l-yumnā 'alā yadihi l-yusrā thumma qāl: Bismillāh, al-ḥamdu lillāhi l-ladhī ja'ala l-mā'a ṭahūran wa-lam yaj'alhu najisan",
-          "translation": "Muhammad brought him the water, and he poured his right hand over his left hand, then said: 'In the name of Allah. Praise be to Allah, Who made water purifying and not impure.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/12345#2"
-        },
-        {
-          "arabic": "ثُمَّ تَمَضْمَضَ ثَلَاثاً وَاسْتَنْشَقَ ثَلَاثاً، وَقَالَ: اللَّهُمَّ لَقِّنِي حُجَّتِي يَوْمَ أَلْقَاكَ وَأَطْلِقْ لِسَانِي بِذِكْرِكَ",
-          "transliteration": "Thumma tamaḍmaḍa thalāthan wa-stanshaqaa thalāthan, wa-qāl: Allāhumma laqinnī ḥujjatī yawma alqāka wa-aṭliq lisānī bi-dhikrika",
-          "translation": "Then he rinsed his mouth three times and inhaled water into his nose three times, saying: 'O Allah, teach me my evidence on the day I meet You, and loosen my tongue with Your remembrance.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/12345#3"
-        },
-        {
-          "arabic": "ثُمَّ غَسَلَ وَجْهَهُ ثَلَاثاً، وَقَالَ: اللَّهُمَّ بَيِّضْ وَجْهِي يَوْمَ تَسْوَدُّ فِيهِ الْوُجُوهُ، وَلَا تُسَوِّدْ وَجْهِي يَوْمَ تَبْيَضُّ فِيهِ الْوُجُوهُ",
-          "transliteration": "Thumma ghasala wajhahu thalāthan, wa-qāl: Allāhumma bayyiḍ wajhī yawma taswaddu fīhi l-wujūh, wa-lā tusawwid wajhī yawma tabyaḍḍu fīhi l-wujūh",
-          "translation": "Then he washed his face three times, saying: 'O Allah, whiten my face on the day when faces will be blackened, and do not blacken my face on the day when faces will be whitened.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/12345#4"
-        },
-        {
-          "arabic": "ثُمَّ غَسَلَ يَدَهُ الْيُمْنَى ثَلَاثاً، وَقَالَ: اللَّهُمَّ أَعْطِنِي كِتَابِي بِيَمِينِي وَالْخُلْدَ فِي الْجِنَانِ بِيَسَارِي، وَحَاسِبْنِي حِسَاباً يَسِيراً",
-          "transliteration": "Thumma ghasala yadahu l-yumnā thalāthan, wa-qāl: Allāhumma a'ṭinī kitābī bi-yamīnī wa-l-khulda fī l-jināni bi-yasārī, wa-ḥāsibnī ḥisāban yasīrā",
-          "translation": "Then he washed his right arm three times, saying: 'O Allah, give me my book in my right hand and eternity in Paradise in my left hand, and reckon with me an easy reckoning.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/12345#5"
-        },
-        {
-          "arabic": "ثُمَّ غَسَلَ يَدَهُ الْيُسْرَى ثَلَاثاً، وَقَالَ: اللَّهُمَّ لَا تُعْطِنِي كِتَابِي بِشِمَالِي وَلَا مِنْ وَرَاءِ ظَهْرِي، وَلَا تَجْعَلْهَا مَغْلُولَةً إِلَى عُنُقِي، وَأَعُوذُ بِكَ مِنْ مُقَطَّعَاتِ النِّيرَانِ",
-          "transliteration": "Thumma ghasala yadahu l-yusrā thalāthan, wa-qāl: Allāhumma lā tu'ṭinī kitābī bi-shimālī wa-lā min warā'i ẓahrī, wa-lā taj'alhā maghlūlatan ilā 'unuqī, wa-a'ūdhu bika min muqaṭṭa'āti n-nīrān",
-          "translation": "Then he washed his left arm three times, saying: 'O Allah, do not give me my book in my left hand, nor from behind my back, and do not make it chained to my neck. I seek refuge in You from the cutting portions of the Fire.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/12345#6"
-        },
-        {
-          "arabic": "ثُمَّ مَسَحَ رَأْسَهُ، وَقَالَ: اللَّهُمَّ غَشِّنِي بِرَحْمَتِكَ وَبَرَكَاتِكَ وَعَفْوِكَ",
-          "transliteration": "Thumma masaḥa ra'sahu, wa-qāl: Allāhumma ghashshinī bi-raḥmatika wa-barakātika wa-'afwik",
-          "translation": "Then he wiped his head, saying: 'O Allah, cover me with Your mercy, Your blessings, and Your forgiveness.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/12345#7"
-        }
-      ]
+  "title": "وضوء | Imam Ali's Comprehensive Wudhu Supplication",
+  "summary": "Detailed narration of Imam Ali's wudhu practice with spiritual supplications for each step",
+  "steps": [
+    {
+      "arabic": "عَنْ أَبِي عَبْدِ اَللَّهِ عَلَيْهِ السَّلاَمُ قَالَ:",
+      "transliteration": "ʿAn Abī ʿAbdillāhi ʿalayhi s-salāmu qāl:",
+      "translation": "From Abu Abdullah (Imam al-Sadiq), peace be upon him, who said:",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
     },
-    "hadith2": {
-      "title": "وضوء | Wudhu Wisdom from the Prophet",
-      "summary": "Essential teachings on the spiritual significance of ablution rituals",
-      "steps": [
-        {
-          "arabic": "قال رسول الله ﷺ: إِذَا تَوَضَّأَ الْعَبْدُ الْمُؤْمِنُ فَمَضْمَضَ خَرَجَتِ الْخَطَايَا مِنْ فِيهِ",
-          "transliteration": "Qāla Rasūlu llāhi ﷺ: Idhā tawaḍḍa'a l-'abdu l-mu'minu fa-maḍmaḍa kharajati l-khaṭāyā min fīhi",
-          "translation": "The Messenger of Allah ﷺ said: 'When the believing servant performs ablution and rinses his mouth, the sins depart from his mouth.'",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/54321"
-        },
-        {
-          "arabic": "فَإِذَا اسْتَنْثَرَ خَرَجَتِ الْخَطَايَا مِنْ أَنْفِهِ",
-          "transliteration": "Fa-idhā stanthara kharajati l-khaṭāyā min anfihi",
-          "translation": "When he clears his nose, the sins depart from his nose.",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/54321#2"
-        },
-        {
-          "arabic": "فَإِذَا غَسَلَ وَجْهَهُ خَرَجَتِ الْخَطَايَا مِنْ وَجْهِهِ حَتَّى تَخْرُجَ مِنْ تَحْتِ أَشْفَارِ عَيْنَيْهِ",
-          "transliteration": "Fa-idhā ghasala wajhahu kharajati l-khaṭāyā min wajhihi ḥattā takhruja min taḥti ashfāri 'aynayhi",
-          "translation": "When he washes his face, the sins depart from his face, even from beneath his eyelashes.",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/54321#3"
-        },
-        {
-          "arabic": "فَإِذَا غَسَلَ يَدَيْهِ خَرَجَتِ الْخَطَايَا مِنْ يَدَيْهِ حَتَّى تَخْرُجَ مِنْ تَحْتِ أَظْفَارِ يَدَيْهِ",
-          "transliteration": "Fa-idhā ghasala yadayhi kharajati l-khaṭāyā min yadayhi ḥattā takhruja min taḥti aẓfāri yadayhi",
-          "translation": "When he washes his hands, the sins depart from his hands, even from beneath his fingernails.",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/54321#4"
-        },
-        {
-          "arabic": "فَإِذَا مَسَحَ بِرَأْسِهِ خَرَجَتِ الْخَطَايَا مِنْ رَأْسِهِ حَتَّى تَخْرُجَ مِنْ أُذُنَيْهِ",
-          "transliteration": "Fa-idhā masaḥa bi-ra'sihi kharajati l-khaṭāyā min ra'sihi ḥattā takhruja min udhnayhi",
-          "translation": "When he wipes his head, the sins depart from his head, even from his ears.",
-          "reference": "https://al-kafi.org/chapter/wudhu/hadith/54321#5"
-        }
-      ]
+    {
+      "arabic": "بَيْنَا أَمِيرُ اَلْمُؤْمِنِينَ عَلَيْهِ السَّلاَمُ ذَاتَ يَوْمٍ جَالِساً مَعَ اِبْنِ اَلْحَنَفِيَّةِ إِذْ قَالَ يَا مُحَمَّدُ اِئْتِنِي بِإِنَاءٍ فِيهِ مَاءٌ أَتَوَضَّأْ لِلصَّلاَةِ",
+      "transliteration": "Baynā Amīru l-Muʾminīna ʿalayhi s-salāmu dhāta yawmin jālisan maʿa ibni l-Ḥanafiyyati idh qāla yā Muḥammadu iʾtinī bi-ināʾin fīhi māʾun atawaḍḍaʾu li-ṣ-ṣalāh",
+      "translation": "One day, the Commander of the Faithful (Imam Ali), peace be upon him, was sitting with Ibn al-Hanafiyyah when he said, \"O Muhammad, bring me a vessel with water so I may perform ablution for prayer.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَأَتَاهُ مُحَمَّدٌ بِالْمَاءِ فَأَكْفَأَ بِيَدِهِ اَلْيُمْنَى عَلَى يَدِهِ اَلْيُسْرَى",
+      "transliteration": "Fa-atāhu Muḥammadun bi-l-māʾi fa-akfaʾa bi-yadihi l-yumnā ʿalā yadihi l-yusrā",
+      "translation": "Muhammad brought him the water. He poured water with his right hand onto his left hand,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "ثُمَّ قَالَ بِسْمِ اَللَّهِ اَلْحَمْدُ لِلَّهِ اَلَّذِي جَعَلَ اَلْمَاءَ طَهُوراً وَ لَمْ يَجْعَلْهُ نَجِساً",
+      "transliteration": "Thumma qāla bi-smi llāhi l-ḥamdu li-llāhi l-ladhī jaʿala l-māʾa ṭahūran wa lam yajʿalhu najisā",
+      "translation": "Then he said: \"In the name of Allah. Praise be to Allah, who made water purifying and not impure.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "قَالَ ثُمَّ اِسْتَنْجَى",
+      "transliteration": "Qāla thumma istanjā",
+      "translation": "Then he cleansed himself (after relieving himself),",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ حَصِّنْ فَرْجِي وَ أَعِفَّهُ وَ اُسْتُرْ عَوْرَتِي وَ حَرِّمْنِي عَلَى اَلنَّارِ",
+      "transliteration": "Fa-qāla llāhumma ḥaṣṣin farjī wa aʿiffahu wa ustur ʿawratī wa ḥarrimnī ʿalā n-nār",
+      "translation": "And said: \"O Allah, safeguard my chastity, keep me pure, conceal my faults, and forbid me from the Fire.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "ثُمَّ تَمَضْمَضَ",
+      "transliteration": "Thumma tamaḍmaḍa",
+      "translation": "He then rinsed his mouth,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ لَقِّنِّي حُجَّتِي يَوْمَ أَلْقَاكَ وَ أَطْلِقْ لِسَانِي بِذِكْرِكَ",
+      "transliteration": "Fa-qāla llāhumma laqqinnī ḥujjatī yawma alqāka wa aṭliq lisānī bi-dhikrika",
+      "translation": "And said: \"O Allah, grant me my argument on the day I meet You, and let my tongue flow with Your remembrance.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "ثُمَّ اِسْتَنْشَقَ",
+      "transliteration": "Thumma istanshaqa",
+      "translation": "He then inhaled water into his nostrils,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ لاَ تُحَرِّمْ عَلَيَّ رِيحَ اَلْجَنَّةِ وَ اِجْعَلْنِي مِمَّنْ يَشَمُّ رِيحَهَا وَ رَوْحَهَا وَ رَيْحَانَهَا وَ طِيبَهَا",
+      "transliteration": "Fa-qāla llāhumma lā tuḥarrim ʿalayya rīḥa l-jannati wa ijʿalnī mimman yashammu rīḥahā wa rawḥahā wa rayḥānahā wa ṭībahā",
+      "translation": "And said: \"O Allah, do not deprive me of the fragrance of Paradise, and make me among those who inhale its fragrance, bliss, flowers, and sweetness.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "قَالَ ثُمَّ غَسَلَ وَجْهَهُ",
+      "transliteration": "Qāla thumma ghasala wajhahu",
+      "translation": "Then he washed his face,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ بَيِّضْ وَجْهِي يَوْمَ تَسْوَدُّ فِيهِ اَلْوُجُوهُ وَ لاَ تُسَوِّدْ وَجْهِي يَوْمَ تَبْيَضُّ فِيهِ اَلْوُجُوهُ",
+      "transliteration": "Fa-qāla llāhumma bayyiḍ wajhī yawma taswaddu fīhi l-wujūhu wa lā tusawwid wajhī yawma tabyaḍḍu fīhi l-wujūh",
+      "translation": "And said: \"O Allah, brighten my face on the day when faces turn black, and do not darken my face on the day when faces turn white.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "ثُمَّ غَسَلَ يَدَهُ اَلْيُمْنَى",
+      "transliteration": "Thumma ghasala yadahu l-yumnā",
+      "translation": "Then he washed his right hand,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ أَعْطِنِي كِتَابِي بِيَمِينِي وَ اَلْخُلْدَ فِي اَلْجِنَانِ بِيَسَارِي وَ حَاسِبْنِي حِسٰاباً يَسِيراً",
+      "transliteration": "Fa-qāla llāhumma aʿṭinī kitābī bi-yamīnī wa l-khulda fī l-jināni bi-yasārī wa ḥāsibnī ḥisāban yasīrā",
+      "translation": "And said: \"O Allah, grant me my record in my right hand, eternal life in Paradise in my left, and judge me with an easy reckoning.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "ثُمَّ غَسَلَ يَدَهُ اَلْيُسْرَى",
+      "transliteration": "Thumma ghasala yadahu l-yusrā",
+      "translation": "Then he washed his left hand,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ لاَ تُعْطِنِي كِتَابِي بِشِمَالِي وَ لاَ تَجْعَلْهَا مَغْلُولَةً إِلَى عُنُقِي وَ أَعُوذُ بِكَ مِنْ مُقَطَّعَاتِ اَلنِّيرَانِ",
+      "transliteration": "Fa-qāla llāhumma lā tuʿṭinī kitābī bi-shimālī wa lā tajʿalhā maghlūlatan ilā ʿunuqī wa aʿūdhu bika min muqaṭṭaʿāti n-nīrān",
+      "translation": "And said: \"O Allah, do not give me my record in my left hand, nor bind it to my neck, and I seek refuge in You from the flames of Hellfire.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "ثُمَّ مَسَحَ رَأْسَهُ",
+      "transliteration": "Thumma masaḥa raʾsahu",
+      "translation": "Then he wiped his head,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ غَشِّنِي بِرَحْمَتِكَ وَ بَرَكَاتِكَ وَ عَفْوِكَ",
+      "transliteration": "Fa-qāla llāhumma ghashshinī bi-raḥmatika wa barakātika wa ʿafwik",
+      "translation": "And said: \"O Allah, envelop me in Your mercy, blessings, and forgiveness.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "قَالَ ثُمَّ مَسَحَ رِجْلَيْهِ",
+      "transliteration": "Qāla thumma masaḥa rijlayhi",
+      "translation": "Then he wiped his feet,",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "فَقَالَ اَللَّهُمَّ ثَبِّتْنِي عَلَى اَلصِّرَاطِ يَوْمَ تَزِلُّ فِيهِ اَلْأَقْدَامُ وَ اِجْعَلْ سَعْيِي فِيمَا يُرْضِيكَ عَنِّي يَا أَرْحَمَ اَلرَّاحِمِينَ",
+      "transliteration": "Fa-qāla llāhumma thabbitnī ʿalā ṣ-ṣirāṭi yawma tazillu fīhi l-aqdāmu wa ijʿal saʿyī fīmā yurḍīka ʿannī yā arḥama r-rāḥimīn",
+      "translation": "And said: \"O Allah, keep me steadfast on the Bridge (Sirat) on the day when feet slip, and let my efforts be in what pleases You, O Most Merciful of the Merciful.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
+    },
+    {
+      "arabic": "ثُمَّ رَفَعَ رَأْسَهُ فَنَظَرَ إِلَى مُحَمَّدٍ فَقَالَ يَا مُحَمَّدُ مَنْ تَوَضَّأَ مِثْلَ وُضُوئِي وَ قَالَ مِثْلَ قَوْلِي خَلَقَ اَللَّهُ عَزَّ وَ جَلَّ مِنْ كُلِّ قَطْرَةٍ مَلَكاً يُقَدِّسُهُ وَ يُسَبِّحُهُ وَ يُكَبِّرُهُ وَ يَكْتُبُ اَللَّهُ تَعَالَى لَهُ ثَوَابَ ذَلِكَ إِلَى يَوْمِ اَلْقِيَامَةِ",
+      "transliteration": "Thumma rafaʿa raʾsahu fa-naẓara ilā Muḥammadin fa-qāla yā Muḥammadu man tawaḍḍaʾa mithla wuḍūʾī wa qāla mithla qawlī khalaqa llāhu ʿazza wa jalla min kulli qaṭratin malakan yuqaddisuhu wa yusabbiḥuhu wa yukabbiruhu wa yaktubu llāhu taʿālā lahu thawāba dhālika ilā yawmi l-qiyāmah",
+      "translation": "Then he raised his head and looked at Muhammad and said, \"O Muhammad, whoever performs ablution like mine and recites these words like I did, Allah the Almighty will create from every drop [of water] an angel who glorifies, praises, and exalts Him, and Allah will record its reward for him until the Day of Resurrection.\"",
+      "reference": "https://hadith.inoor.ir/fa/hadith/310915"
     }
+  ]
+}
+
   },
   "sajjadiya": {
     "supplication1": {

@@ -82,7 +82,7 @@ function showHadithOptions(category) {
 
   // Get appropriate icon for category - updated for new category
   const categoryIcon = category === 'wudhu' 
-    ? '🤲💧' 
+    ? '💧' 
     : category === 'upon_waking'
     ? '🌅'
     : '📜';
@@ -132,7 +132,7 @@ function getCardIcon(title) {
   // Default icons - updated to include the upon_waking category
   const icons = {
     'default': '🤲',
-    'wudhu': '🤲💧',
+    'wudhu': '💧',
     'prayer': '📿',
     'supplication': '📜',
     'confession': '🔄',
