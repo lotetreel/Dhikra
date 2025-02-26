@@ -7,6 +7,7 @@ let arabicFontSize = 1.8; // Default size in rem
 let englishFontSize = 1.0; // Default size in rem
 let transliterationFontSize = 1.0; // Default size in rem
 let showTransliteration = false; // Default transliteration setting
+let showReferences = false; // Default reference setting
 let isPortraitMode = window.innerHeight > window.innerWidth;
 
 // Fetch the hadith data from the JSON file
@@ -76,7 +77,7 @@ function showHadithOptions(category) {
     : 'Select a Supplication';
 
   // Get appropriate icon for category
-  const categoryIcon = category === 'wudhu' ? '💦' : '📜';
+  const categoryIcon = category === 'wudhu' ? '🤲💧' : '📜';
 
   // Add decorative background pattern
   const existingPattern = document.querySelector('.background-pattern');
@@ -123,7 +124,7 @@ function getCardIcon(title) {
   // Default icons
   const icons = {
     'default': '🤲',
-    'wudhu': '💦',
+    'wudhu': '🤲💧',
     'prayer': '📿',
     'supplication': '📜',
     'confession': '🔄',
@@ -183,13 +184,18 @@ function loadHadithDetail(hadithId, category) {
     stepDiv.className = 'wudhu-step' + (index === 0 ? ' active' : '');
     stepDiv.setAttribute('data-step', index + 1);
     
-    // Add structure with transliteration
+    // Add structure with transliteration and reference section
     stepDiv.innerHTML = `
       <div class="step-number">${index + 1}</div>
       <div class="step-text">
         <p class="arabic">${step.arabic}</p>
         <p class="transliteration" style="display: ${showTransliteration ? 'block' : 'none'}">${step.transliteration || 'Transliteration not available'}</p>
         <p class="translation">${step.translation}</p>
+        <div class="reference-container" style="display: ${showReferences ? 'block' : 'none'}">
+          <a href="${step.reference || '#'}" target="_blank" class="reference-link">
+            ${step.reference ? '📚 Source' : 'No reference available'}
+          </a>
+        </div>
       </div>
     `;
     stepsContainer.appendChild(stepDiv);
@@ -301,7 +307,15 @@ function toggleTransliteration() {
   updateTransliterationDisplay();
   updateTransliterationSizeControlVisibility();
   vibrate();
-  saveFontPreferences();
+  savePreferences();
+}
+
+// Function to toggle references
+function toggleReferences() {
+  showReferences = !showReferences;
+  updateReferenceDisplay();
+  vibrate();
+  savePreferences();
 }
 
 // Update the display based on transliteration preference
@@ -319,6 +333,21 @@ function updateTransliterationDisplay() {
   }
 }
 
+// Update the display based on reference preference
+function updateReferenceDisplay() {
+  const referenceContainers = document.querySelectorAll('.reference-container');
+  
+  referenceContainers.forEach(container => {
+    container.style.display = showReferences ? 'block' : 'none';
+  });
+  
+  // Update the toggle switch appearance
+  const referencesToggle = document.getElementById('references-toggle');
+  if (referencesToggle) {
+    referencesToggle.checked = showReferences;
+  }
+}
+
 // Add a new function to update transliteration size control visibility
 function updateTransliterationSizeControlVisibility() {
   const translitSizeControl = document.querySelector('.transliteration-font-control');
@@ -327,20 +356,22 @@ function updateTransliterationSizeControlVisibility() {
   }
 }
 
-// Save font size preferences to localStorage
-function saveFontPreferences() {
+// Save preferences to localStorage
+function savePreferences() {
   localStorage.setItem('arabicFontSize', arabicFontSize);
   localStorage.setItem('englishFontSize', englishFontSize);
   localStorage.setItem('transliterationFontSize', transliterationFontSize);
   localStorage.setItem('showTransliteration', showTransliteration);
+  localStorage.setItem('showReferences', showReferences);
 }
 
-// Load font size preferences from localStorage
-function loadFontPreferences() {
+// Load preferences from localStorage
+function loadPreferences() {
   const savedArabicSize = localStorage.getItem('arabicFontSize');
   const savedEnglishSize = localStorage.getItem('englishFontSize');
   const savedTransliterationSize = localStorage.getItem('transliterationFontSize');
   const savedTransliteration = localStorage.getItem('showTransliteration');
+  const savedReferences = localStorage.getItem('showReferences');
   
   if (savedArabicSize) {
     arabicFontSize = parseFloat(savedArabicSize);
@@ -356,6 +387,10 @@ function loadFontPreferences() {
   
   if (savedTransliteration !== null) {
     showTransliteration = savedTransliteration === 'true';
+  }
+  
+  if (savedReferences !== null) {
+    showReferences = savedReferences === 'true';
   }
   
   updateFontSizes();
@@ -538,6 +573,13 @@ function setupSettingsButton() {
         <span class="toggle-slider"></span>
       </label>
     </div>
+    <div class="toggle-control">
+      <span>Show References:</span>
+      <label class="toggle-switch">
+        <input type="checkbox" id="references-toggle" ${showReferences ? 'checked' : ''}>
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
   `;
   
   // Add click event to toggle settings panel
@@ -567,28 +609,28 @@ function setupSettingsButton() {
     arabicFontSize = Math.min(arabicFontSize + 0.2, 3.0);
     updateFontSizes();
     vibrate();
-    saveFontPreferences();
+    savePreferences();
   });
   
   document.getElementById('arabic-decrease').addEventListener('click', () => {
     arabicFontSize = Math.max(arabicFontSize - 0.2, 1.0);
     updateFontSizes();
     vibrate();
-    saveFontPreferences();
+    savePreferences();
   });
   
   document.getElementById('english-increase').addEventListener('click', () => {
     englishFontSize = Math.min(englishFontSize + 0.1, 1.8);
     updateFontSizes();
     vibrate();
-    saveFontPreferences();
+    savePreferences();
   });
   
   document.getElementById('english-decrease').addEventListener('click', () => {
     englishFontSize = Math.max(englishFontSize - 0.1, 0.8);
     updateFontSizes();
     vibrate();
-    saveFontPreferences();
+    savePreferences();
   });
   
   // Add transliteration size control events
@@ -597,7 +639,7 @@ function setupSettingsButton() {
       transliterationFontSize = Math.min(transliterationFontSize + 0.1, 1.8);
       updateFontSizes();
       vibrate();
-      saveFontPreferences();
+      savePreferences();
     });
   }
   
@@ -606,19 +648,22 @@ function setupSettingsButton() {
       transliterationFontSize = Math.max(transliterationFontSize - 0.1, 0.8);
       updateFontSizes();
       vibrate();
-      saveFontPreferences();
+      savePreferences();
     });
   }
   
   // Add transliteration toggle event
   document.getElementById('transliteration-toggle').addEventListener('change', toggleTransliteration);
+  
+  // Add references toggle event
+  document.getElementById('references-toggle').addEventListener('change', toggleReferences);
 }
 
 // Initialization when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   loadHadithData();
   setupSwipeGestures();
-  loadFontPreferences();
+  loadPreferences();
   
   // Initial orientation detection
   isPortraitMode = window.innerHeight > window.innerWidth;
@@ -636,5 +681,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Save preferences when user leaves the page
-  window.addEventListener('beforeunload', saveFontPreferences);
+  window.addEventListener('beforeunload', savePreferences);
 });
+
+// For backward compatibility, rename functions
+function loadFontPreferences() {
+  loadPreferences();
+}
+
+function saveFontPreferences() {
+  savePreferences();
+}
