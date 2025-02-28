@@ -1186,6 +1186,29 @@ input:checked + .toggle-slider:before {
     line-height: 1.4;
   }
   
+  /* Fix positioning of active step */
+  .wudhu-step.active {
+    position: relative !important;
+    top: auto;
+    left: auto;
+    right: auto;
+  }
+  
+  /* Ensure content is scrollable */
+  .wudhu-steps {
+    overflow-y: auto !important;
+    max-height: 80vh;
+  }
+  
+  /* Make text slightly smaller in landscape to fit better */
+  .arabic {
+    font-size: calc(var(--arabic-font-size) * 0.85);
+  }
+  
+  .translation {
+    font-size: calc(var(--english-font-size) * 0.9);
+  }
+  
   @media (max-height: 450px) {
     #hadith-title {
       font-size: 1.1rem;
