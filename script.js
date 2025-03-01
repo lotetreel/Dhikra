@@ -180,6 +180,33 @@ function addScrollIndicator() {
   });
 }
 
+// Fix for landscape mode positioning
+function fixLandscapeSteps() {
+  // Get all steps
+  const steps = document.querySelectorAll('.wudhu-step');
+  const stepsContainer = document.getElementById('steps-container');
+  
+  // Reset scroll position
+  if (stepsContainer && !isPortraitMode) {
+    stepsContainer.scrollTop = 0;
+  }
+  
+  // Make sure all steps are positioned properly
+  steps.forEach(step => {
+    if (step.classList.contains('active')) {
+      step.style.position = 'relative';
+      step.style.opacity = '1';
+      step.style.visibility = 'visible';
+      step.style.display = 'block';
+      step.style.top = '0';
+      step.style.left = '0';
+    } else {
+      step.style.position = 'absolute';
+      step.style.opacity = '0';
+    }
+  });
+}
+
 // Load and display the detailed view of a hadith/supplication
 function loadHadithDetail(hadithId, category) {
   const hadith = hadithData[category][hadithId];
@@ -193,13 +220,6 @@ function loadHadithDetail(hadithId, category) {
     const stepDiv = document.createElement('div');
     stepDiv.className = 'wudhu-step' + (index === 0 ? ' active' : '');
     stepDiv.setAttribute('data-step', index + 1);
-    
-    // FIXED: Set initial positioning based on orientation
-    if (!isPortraitMode && index > 0) {
-      stepDiv.style.position = 'absolute';
-    } else if (!isPortraitMode && index === 0) {
-      stepDiv.style.position = 'relative';
-    }
     
     // Add structure with transliteration and reference section
     stepDiv.innerHTML = `
@@ -242,8 +262,8 @@ function loadHadithDetail(hadithId, category) {
   // Dynamic size adjustments
   updateNavigationUI();
   
-  // FIXED: Reset step positioning after loading
-  resetStepPositioning();
+  // Apply landscape fix
+  fixLandscapeSteps();
   
   // Remove text controls if they exist
   const textControls = document.querySelector('.text-controls');
@@ -262,30 +282,16 @@ function nextStep() {
     // Small delay for animations to be visible
     setTimeout(() => {
       currentStep++;
-      const nextStepElement = document.querySelector(`[data-step="${currentStep}"]`);
-      nextStepElement.classList.add('active');
-      
-      // FIXED: Ensure proper positioning in landscape mode
-      if (!isPortraitMode) {
-        // Reset all steps positioning
-        document.querySelectorAll('.wudhu-step').forEach(step => {
-          if (!step.classList.contains('active')) {
-            step.style.position = 'absolute';
-          } else {
-            step.style.position = 'relative';
-            step.style.top = '0';
-            step.style.left = '0';
-          }
-        });
-        
-        // Force immediate scroll reset
-        document.getElementById('steps-container').scrollTop = 0;
-      }
-      
+      document.querySelector(`[data-step="${currentStep}"]`).classList.add('active');
       updateProgress();
       updateButtonState();
       updateNavigationUI();
       vibrate();
+      
+      // Reset scroll position and fix step positioning
+      if (!isPortraitMode) {
+        setTimeout(fixLandscapeSteps, 50);
+      }
       
       // Adjust content height after step change
       adjustContentHeight();
@@ -303,28 +309,15 @@ function previousStep() {
       const prevStepElement = document.querySelector(`[data-step="${currentStep}"]`);
       prevStepElement.classList.remove('prev-step');
       prevStepElement.classList.add('active');
-      
-      // FIXED: Ensure proper positioning in landscape mode
-      if (!isPortraitMode) {
-        // Reset all steps positioning
-        document.querySelectorAll('.wudhu-step').forEach(step => {
-          if (!step.classList.contains('active')) {
-            step.style.position = 'absolute';
-          } else {
-            step.style.position = 'relative';
-            step.style.top = '0';
-            step.style.left = '0';
-          }
-        });
-        
-        // Force immediate scroll reset
-        document.getElementById('steps-container').scrollTop = 0;
-      }
-      
       updateProgress();
       updateButtonState();
       updateNavigationUI();
       vibrate();
+      
+      // Reset scroll position and fix step positioning
+      if (!isPortraitMode) {
+        setTimeout(fixLandscapeSteps, 50);
+      }
       
       // Adjust content height after step change
       adjustContentHeight();
@@ -453,44 +446,6 @@ function loadPreferences() {
   updateFontSizes();
 }
 
-// Add this improved function for cleaning up step positioning
-function resetStepPositioning() {
-  if (!isPortraitMode) {
-    const stepsContainer = document.getElementById('steps-container');
-    const activeStep = document.querySelector('.wudhu-step.active');
-    
-    // Reset container scroll
-    stepsContainer.scrollTop = 0;
-    
-    // Make active step visible at the top
-    if (activeStep) {
-      // Remove all transitions temporarily for immediate positioning
-      document.querySelectorAll('.wudhu-step').forEach(step => {
-        step.style.transition = 'none';
-        if (step !== activeStep) {
-          step.style.position = 'absolute';
-          step.style.opacity = '0';
-        } else {
-          step.style.position = 'relative';
-          step.style.top = '0';
-          step.style.left = '0';
-          step.style.opacity = '1';
-        }
-      });
-      
-      // Force reflow
-      void stepsContainer.offsetHeight;
-      
-      // Restore transitions
-      setTimeout(() => {
-        document.querySelectorAll('.wudhu-step').forEach(step => {
-          step.style.transition = '';
-        });
-      }, 50);
-    }
-  }
-}
-
 // Create side navigation in each wudhu step based on device orientation
 function createSideNavigation() {
   // Only add side navigation in landscape mode
@@ -561,14 +516,6 @@ function adjustContentHeight() {
       
       // FIXED: Reset scroll position immediately
       stepsContainer.scrollTop = 0;
-      
-      // Ensure active step is visible
-      const activeStep = document.querySelector('.wudhu-step.active');
-      if (activeStep) {
-        // Force step to be relatively positioned for proper scrolling
-        activeStep.style.position = 'relative';
-        // REMOVED: scrollIntoView that was causing the issue
-      }
     } else {
       // For portrait mode, handle bottom navigation
       if (navControls) {
@@ -623,8 +570,8 @@ function handleOrientationChange() {
     
     updateNavigationUI();
     
-    // FIXED: Apply the new reset function
-    resetStepPositioning();
+    // FIXED: Apply the landscape fix
+    fixLandscapeSteps();
     
     // Additional delay to ensure UI has updated
     setTimeout(adjustContentHeight, 150);
