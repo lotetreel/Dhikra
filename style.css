@@ -1347,3 +1347,45 @@ input:checked + .toggle-slider:before {
     width: 10%;
   }
 }
+/* ===== LANDSCAPE MODE FIXES - ADD TO END OF STYLE.CSS ===== */
+
+/* Fix positioning in landscape mode */
+@media (orientation: landscape) {
+  /* Make steps container a proper scroll container */
+  .wudhu-steps {
+    position: relative !important;
+    overflow-y: auto !important;
+    max-height: 75vh;
+  }
+  
+  /* Fix active step positioning to prevent cumulative downward shift */
+  .wudhu-step.active {
+    position: relative !important;
+    transform: none;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  /* Ensure content is always visible */
+  body.landscape-mode #steps-container {
+    scroll-behavior: auto;
+  }
+  
+  /* Better positioning for side navigation */
+  .side-navigation {
+    z-index: 20;
+  }
+  
+  .nav-arrow {
+    background: rgba(22, 33, 62, 0.6);
+    backdrop-filter: blur(5px);
+  }
+}
+
+/* Make sure the active step has higher z-index */
+.wudhu-step.active {
+  z-index: 10;
+}
+
+/* End of landscape mode fixes */
