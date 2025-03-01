@@ -1273,3 +1273,77 @@ input:checked + .toggle-slider:before {
     background: rgba(255, 255, 255, 0.12);
   }
 }
+/* Add these CSS rules to the end of your style.css file */
+
+/* Fix positioning in landscape mode */
+@media (orientation: landscape) {
+  /* Make steps container a proper scroll container */
+  .wudhu-steps {
+    position: relative !important;
+    overflow-y: auto !important;
+    max-height: 75vh;
+    display: block;
+  }
+  
+  /* Fix active step positioning to prevent cumulative downward shift */
+  .wudhu-step.active {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    transform: none !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    height: auto !important;
+  }
+  
+  /* Make inactive steps truly invisible and take no space */
+  .wudhu-step:not(.active) {
+    position: absolute !important;
+    visibility: hidden;
+    height: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
+  
+  /* Ensure content is always visible */
+  body.landscape-mode #steps-container {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fix animation issues that might cause layout shifts */
+.wudhu-step {
+  transform-origin: top center;
+}
+
+.wudhu-step.active {
+  z-index: 10;
+}
+
+/* Improve the side navigation positioning and visibility */
+.side-navigation {
+  z-index: 20;
+}
+
+.nav-arrow {
+  background: rgba(22, 33, 62, 0.6);
+  backdrop-filter: blur(5px);
+}
+
+.nav-arrow:hover {
+  background: rgba(22, 33, 62, 0.9);
+}
+
+/* Add this media query for very wide landscape views (tablets, etc.) */
+@media (orientation: landscape) and (min-width: 768px) {
+  .wudhu-step {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  
+  .nav-arrow {
+    width: 10%;
+  }
+}
