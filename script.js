@@ -82,7 +82,7 @@ function showHadithOptions(category) {
 
   // Get appropriate icon for category - updated for new category
   const categoryIcon = category === 'wudhu' 
-    ? '💧' 
+    ? '🤲💧' 
     : category === 'upon_waking'
     ? '🌅'
     : '📜';
@@ -132,7 +132,7 @@ function getCardIcon(title) {
   // Default icons - updated to include the upon_waking category
   const icons = {
     'default': '🤲',
-    'wudhu': '💧',
+    'wudhu': '🤲💧',
     'prayer': '📿',
     'supplication': '📜',
     'confession': '🔄',
@@ -260,11 +260,6 @@ function nextStep() {
       
       // Adjust content height after step change
       adjustContentHeight();
-      
-      // Reset scroll position in landscape mode
-      if (!isPortraitMode) {
-        document.getElementById('steps-container').scrollTop = 0;
-      }
     }, 100);
   }
 }
@@ -286,11 +281,6 @@ function previousStep() {
       
       // Adjust content height after step change
       adjustContentHeight();
-      
-      // Reset scroll position in landscape mode
-      if (!isPortraitMode) {
-        document.getElementById('steps-container').scrollTop = 0;
-      }
     }, 100);
   }
 }
@@ -479,17 +469,22 @@ function adjustContentHeight() {
       const headerHeight = sectionHeader ? sectionHeader.offsetHeight : 0;
       const progressHeight = progressBar ? progressBar.offsetHeight : 0;
       
-      // Always enable scrolling in landscape mode
-      const availableHeight = viewportHeight - headerHeight - progressHeight - 30;
-      stepsContainer.style.height = `${availableHeight}px`;
-      stepsContainer.style.overflow = 'auto';
+      // Set steps container to fill available space without creating scroll
+      const availableHeight = viewportHeight - headerHeight - progressHeight - 20; // 20px for padding
       
-      // Ensure active step is visible
+      // Ensure active step is fully visible
       const activeStep = document.querySelector('.wudhu-step.active');
       if (activeStep) {
-        // Force step to be relatively positioned for proper scrolling
-        activeStep.style.position = 'relative';
-        activeStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Check if step content exceeds available height
+        if (activeStep.scrollHeight > availableHeight) {
+          // If content needs scrolling, make container match available height
+          stepsContainer.style.height = `${availableHeight}px`;
+          stepsContainer.style.overflow = 'auto';
+        } else {
+          // If content fits, use content height
+          stepsContainer.style.height = 'auto';
+          stepsContainer.style.overflow = 'visible';
+        }
       }
     } else {
       // For portrait mode, handle bottom navigation
@@ -538,19 +533,7 @@ function updateNavigationUI() {
 
 // Detect orientation changes to optimize UI for landscape/portrait
 function handleOrientationChange() {
-  // Wait for browser to complete orientation change
-  setTimeout(() => {
-    updateNavigationUI();
-    
-    // Reset scroll position
-    const stepsContainer = document.getElementById('steps-container');
-    if (stepsContainer) {
-      stepsContainer.scrollTop = 0;
-    }
-    
-    // Additional delay to ensure UI has updated
-    setTimeout(adjustContentHeight, 150);
-  }, 100);
+  updateNavigationUI();
 }
 
 // Function to create and set up the settings button
@@ -702,7 +685,10 @@ document.addEventListener('DOMContentLoaded', () => {
     adjustContentHeight();
   });
   
-  window.addEventListener('orientationchange', handleOrientationChange);
+  window.addEventListener('orientationchange', function() {
+    updateNavigationUI();
+    setTimeout(adjustContentHeight, 100); // Slight delay to ensure accurate calculations
+  });
   
   // Save preferences when user leaves the page
   window.addEventListener('beforeunload', savePreferences);
