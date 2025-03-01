@@ -180,33 +180,6 @@ function addScrollIndicator() {
   });
 }
 
-// Fix for landscape mode positioning
-function fixLandscapeSteps() {
-  // Get all steps
-  const steps = document.querySelectorAll('.wudhu-step');
-  const stepsContainer = document.getElementById('steps-container');
-  
-  // Reset scroll position
-  if (stepsContainer && !isPortraitMode) {
-    stepsContainer.scrollTop = 0;
-  }
-  
-  // Make sure all steps are positioned properly
-  steps.forEach(step => {
-    if (step.classList.contains('active')) {
-      step.style.position = 'relative';
-      step.style.opacity = '1';
-      step.style.visibility = 'visible';
-      step.style.display = 'block';
-      step.style.top = '0';
-      step.style.left = '0';
-    } else {
-      step.style.position = 'absolute';
-      step.style.opacity = '0';
-    }
-  });
-}
-
 // Load and display the detailed view of a hadith/supplication
 function loadHadithDetail(hadithId, category) {
   const hadith = hadithData[category][hadithId];
@@ -262,9 +235,6 @@ function loadHadithDetail(hadithId, category) {
   // Dynamic size adjustments
   updateNavigationUI();
   
-  // Apply landscape fix
-  fixLandscapeSteps();
-  
   // Remove text controls if they exist
   const textControls = document.querySelector('.text-controls');
   if (textControls) {
@@ -288,13 +258,13 @@ function nextStep() {
       updateNavigationUI();
       vibrate();
       
-      // Reset scroll position and fix step positioning
-      if (!isPortraitMode) {
-        setTimeout(fixLandscapeSteps, 50);
-      }
-      
       // Adjust content height after step change
       adjustContentHeight();
+      
+      // Reset scroll position in landscape mode
+      if (!isPortraitMode) {
+        document.getElementById('steps-container').scrollTop = 0;
+      }
     }, 100);
   }
 }
@@ -314,13 +284,13 @@ function previousStep() {
       updateNavigationUI();
       vibrate();
       
-      // Reset scroll position and fix step positioning
-      if (!isPortraitMode) {
-        setTimeout(fixLandscapeSteps, 50);
-      }
-      
       // Adjust content height after step change
       adjustContentHeight();
+      
+      // Reset scroll position in landscape mode
+      if (!isPortraitMode) {
+        document.getElementById('steps-container').scrollTop = 0;
+      }
     }, 100);
   }
 }
@@ -492,7 +462,7 @@ function createSideNavigation() {
   activeStep.appendChild(sideNav);
 }
 
-// Dynamically adjust content height - FIXED
+// Dynamically adjust content height
 function adjustContentHeight() {
   // Get all relevant elements
   const detailSection = document.getElementById('hadith-detail');
@@ -514,8 +484,13 @@ function adjustContentHeight() {
       stepsContainer.style.height = `${availableHeight}px`;
       stepsContainer.style.overflow = 'auto';
       
-      // FIXED: Reset scroll position immediately
-      stepsContainer.scrollTop = 0;
+      // Ensure active step is visible
+      const activeStep = document.querySelector('.wudhu-step.active');
+      if (activeStep) {
+        // Force step to be relatively positioned for proper scrolling
+        activeStep.style.position = 'relative';
+        activeStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     } else {
       // For portrait mode, handle bottom navigation
       if (navControls) {
@@ -561,17 +536,17 @@ function updateNavigationUI() {
   }
 }
 
-// Detect orientation changes to optimize UI for landscape/portrait - FIXED
+// Detect orientation changes to optimize UI for landscape/portrait
 function handleOrientationChange() {
   // Wait for browser to complete orientation change
   setTimeout(() => {
-    // Update orientation flag
-    isPortraitMode = window.innerHeight > window.innerWidth;
-    
     updateNavigationUI();
     
-    // FIXED: Apply the landscape fix
-    fixLandscapeSteps();
+    // Reset scroll position
+    const stepsContainer = document.getElementById('steps-container');
+    if (stepsContainer) {
+      stepsContainer.scrollTop = 0;
+    }
     
     // Additional delay to ensure UI has updated
     setTimeout(adjustContentHeight, 150);
