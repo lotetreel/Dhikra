@@ -240,6 +240,9 @@ function loadHadithDetail(hadithId, category) {
   if (textControls) {
     textControls.remove();
   }
+  
+  // Add fullscreen button
+  addFullscreenButton();
 }
 
 // Navigation functions
@@ -260,6 +263,9 @@ function nextStep() {
       
       // Adjust content height after step change
       adjustContentHeight();
+      
+      // Add fullscreen button to new active step
+      addFullscreenButton();
     }, 100);
   }
 }
@@ -281,6 +287,9 @@ function previousStep() {
       
       // Adjust content height after step change
       adjustContentHeight();
+      
+      // Add fullscreen button to new active step
+      addFullscreenButton();
     }, 100);
   }
 }
@@ -669,6 +678,78 @@ function setupSettingsButton() {
   document.getElementById('references-toggle').addEventListener('change', toggleReferences);
 }
 
+// For backward compatibility, rename functions
+function loadFontPreferences() {
+  loadPreferences();
+}
+
+function saveFontPreferences() {
+  savePreferences();
+}
+
+// Function to add fullscreen button to each step
+function addFullscreenButton() {
+  // Add fullscreen button to active step
+  const activeStep = document.querySelector('.wudhu-step.active');
+  if (!activeStep) return;
+  
+  // Check if button already exists
+  if (activeStep.querySelector('.fullscreen-btn')) {
+    return;
+  }
+  
+  // Create button
+  const fullscreenBtn = document.createElement('button');
+  fullscreenBtn.className = 'fullscreen-btn';
+  fullscreenBtn.innerHTML = '<span>📱 Fullscreen</span>';
+  fullscreenBtn.setAttribute('aria-label', 'View in fullscreen');
+  fullscreenBtn.onclick = openFullscreenModal;
+  
+  // Add to step
+  activeStep.appendChild(fullscreenBtn);
+}
+
+// Function to open modal with current step content
+function openFullscreenModal() {
+  // Get the current active step
+  const activeStep = document.querySelector('.wudhu-step.active');
+  if (!activeStep) return;
+  
+  // Clone the step content
+  const contentClone = activeStep.querySelector('.step-text').cloneNode(true);
+  
+  // Get the step number for the title
+  const stepNumber = activeStep.getAttribute('data-step');
+  
+  // Create a step title
+  const stepTitle = document.createElement('div');
+  stepTitle.className = 'modal-step-number';
+  stepTitle.textContent = `Step ${stepNumber}`;
+  
+  // Get the modal content container
+  const contentContainer = document.querySelector('.modal-step-content');
+  contentContainer.innerHTML = '';
+  contentContainer.appendChild(stepTitle);
+  contentContainer.appendChild(contentClone);
+  
+  // Show the modal
+  const modal = document.getElementById('fullscreen-modal');
+  modal.classList.add('active');
+  
+  // Add body class to prevent scrolling
+  document.body.classList.add('modal-open');
+}
+
+// Function to close the modal
+function closeModal() {
+  const modal = document.getElementById('fullscreen-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    // Remove body class
+    document.body.classList.remove('modal-open');
+  }
+}
+
 // Initialization when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   loadHadithData();
@@ -690,15 +771,13 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(adjustContentHeight, 100); // Slight delay to ensure accurate calculations
   });
   
+  // Add escape key handler for modal
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+  
   // Save preferences when user leaves the page
   window.addEventListener('beforeunload', savePreferences);
 });
-
-// For backward compatibility, rename functions
-function loadFontPreferences() {
-  loadPreferences();
-}
-
-function saveFontPreferences() {
-  savePreferences();
-}

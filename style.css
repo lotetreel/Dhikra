@@ -392,6 +392,307 @@ body {
   }
 }
 
+/* Add larger touch targets for mobile */
+@media (max-width: 767px) {
+  .nav-btn {
+    min-height: 48px;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+/* Responsive adjustments for the options screen */
+@media (min-width: 768px) {
+  /* For tablets and larger, add a more sophisticated layout */
+  .hadith-options-grid {
+    padding: 1rem 2rem;
+  }
+  
+  .hadith-option-card {
+    max-width: 450px;
+    margin: 0 auto;
+  }
+}
+
+/* Night mode optimization */
+@media (prefers-color-scheme: dark) {
+  .hadith-option-card {
+    background: rgba(255, 255, 255, 0.07);
+  }
+  
+  .hadith-option-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Fullscreen button styles */
+.fullscreen-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background: rgba(230, 175, 46, 0.2);
+  border: 1px solid rgba(230, 175, 46, 0.5);
+  color: #e6af2e;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+
+.fullscreen-btn span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.fullscreen-btn:hover {
+  background: rgba(230, 175, 46, 0.3);
+  transform: translateY(-2px);
+}
+
+.fullscreen-btn:active {
+  transform: scale(0.98);
+}
+
+/* Modal styles */
+.fullscreen-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 15, 30, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 1rem;
+}
+
+.fullscreen-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: rgba(22, 33, 62, 0.8);
+  border-radius: 15px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  position: relative;
+  padding: 2rem;
+  border: 1px solid rgba(230, 175, 46, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(230, 175, 46, 0.2);
+  color: #e6af2e;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.modal-close-btn:hover {
+  background: rgba(230, 175, 46, 0.4);
+  transform: rotate(90deg);
+}
+
+.modal-step-number {
+  font-family: 'Amiri', serif;
+  font-size: 1.8rem;
+  color: #e6af2e;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(230, 175, 46, 0.3);
+  padding-bottom: 0.8rem;
+}
+
+.modal-step-content {
+  padding: 1rem 0;
+}
+
+.modal-step-content .arabic {
+  font-size: calc(var(--arabic-font-size) * 1.2);
+  line-height: 1.8;
+  padding: 1rem 1.5rem 1rem 0.5rem;
+}
+
+.modal-step-content .translation {
+  font-size: calc(var(--english-font-size) * 1.1);
+  line-height: 1.7;
+  padding: 1rem 0.5rem 1rem 1.5rem;
+}
+
+.modal-step-content .transliteration {
+  font-size: calc(var(--transliteration-font-size) * 1.1);
+  margin: 1.2rem 0;
+  padding: 0.8rem;
+}
+
+/* Prevent scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Make modal better on landscape */
+@media (orientation: landscape) {
+  .modal-content {
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modal-step-content {
+    overflow-y: auto;
+    padding: 0 1rem;
+  }
+  
+  .modal-step-content .arabic,
+  .modal-step-content .translation {
+    width: 100%;
+  }
+}
+
+/* Adjust for small screens */
+@media (max-width: 480px) {
+  .fullscreen-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    bottom: 0.8rem;
+    right: 0.8rem;
+  }
+  
+  .modal-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .modal-close-btn {
+    top: 0.8rem;
+    right: 0.8rem;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .modal-step-number {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Landscape mode - show side navigation, hide bottom navigation */
+@media (orientation: landscape) {
+  .navigation-controls {
+    display: none !important;
+  }
+  
+  .side-navigation {
+    display: flex !important;
+  }
+  
+  /* Add padding in landscape mode to prevent text overlap with arrows */
+  body.landscape-mode .wudhu-step {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  
+  .nav-arrow {
+    background: rgba(22, 33, 62, 0.4);
+    backdrop-filter: blur(3px);
+  }
+  
+  .nav-arrow:hover {
+    background: rgba(22, 33, 62, 0.7);
+  }
+  
+  /* Remove fixed heights to prevent scrolling */
+  .wudhu-steps {
+    min-height: auto;
+    height: auto;
+  }
+  
+  /* Adjust the hadith container to fit viewport height */
+  #hadith-detail {
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Make content area take available space */
+  .wudhu-steps {
+    flex: 1;
+    overflow: auto;
+  }
+  
+  /* More compact text in landscape */
+  .arabic {
+    font-size: calc(var(--arabic-font-size, 1.8rem) * 0.9);
+    line-height: 1.5;
+  }
+  
+  .transliteration {
+    font-size: calc(var(--transliteration-font-size, 1rem) * 0.9);
+  }
+  
+  .translation {
+    font-size: calc(var(--english-font-size, 1rem) * 0.9);
+    line-height: 1.4;
+  }
+  
+  @media (max-height: 450px) {
+    #hadith-title {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    
+    .section-header {
+      margin-bottom: 0.3rem;
+    }
+    
+    /* Ultra compact mode for very short screens */
+    .wudhu-step {
+      padding: 0.5rem 60px;
+    }
+    
+    .progress-bar {
+      margin-bottom: 0.3rem;
+    }
+  }
+  
+  @media (max-height: 500px) {
+    .wudhu-step {
+      padding-left: 70px;
+      padding-right: 70px;
+    }
+    
+    .nav-arrow {
+      width: 70px;
+      background: rgba(22, 33, 62, 0.5);
+    }
+  }
+}
+
 .hadith-option-card {
   animation: cardAppear 0.5s ease forwards;
 }
@@ -650,6 +951,144 @@ body {
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
+}
+
+.font-control span {
+  font-size: 0.9rem;
+  color: #a2a8d3;
+}
+
+.font-control-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.font-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(230, 175, 46, 0.1);
+  border: 1px solid #e6af2e;
+  color: #e6af2e;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.font-btn:hover {
+  background: #e6af2e;
+  color: #16213e;
+  transform: scale(1.1);
+}
+
+.font-btn:active {
+  transform: scale(0.95);
+}
+
+/* Animation for cog icon when settings are active */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(180deg); }
+}
+
+.settings-btn.active .settings-icon {
+  animation: spin 0.5s ease-out forwards;
+}
+
+/* Portrait mode - hide side navigation completely */
+@media (orientation: portrait) {
+  .side-navigation {
+    display: none !important;
+  }
+  
+  /* Ensure bottom navigation is visible in portrait */
+  .navigation-controls {
+    display: flex !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0;
+    border-radius: 1rem 1rem 0 0;
+    padding: 1rem;
+    background: rgba(22, 33, 62, 0.95);
+    backdrop-filter: blur(10px);
+    justify-content: space-between;
+    gap: 1rem;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  /* Improve readability in portrait mode */
+  .wudhu-step {
+    padding: 1rem 1.2rem;
+  }
+  
+  /* Add space at bottom for fixed navigation */
+  .wudhu-steps {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+  
+  /* Adjust step text padding */
+  .step-text {
+    padding: 0 0.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    .nav-btn {
+      flex: 1;
+      min-height: 44px;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Adjust settings panel for small screens */
+    .settings-panel {
+      width: 200px;
+      padding: 45px 0.8rem 0.8rem;
+    }
+    
+    .font-control {
+      padding: 0.4rem;
+    }
+    
+    .font-btn {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .settings-btn {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .toggle-control {
+      padding: 0.4rem;
+    }
+    
+    .toggle-switch {
+      width: 46px;
+      height: 22px;
+    }
+    
+    .toggle-slider:before {
+      height: 14px;
+      width: 14px;
+    }
+    
+    input:checked + .toggle-slider:before {
+      transform: translateX(24px);
+    }
+  }
 }
 
 .toggle-control span {
@@ -987,266 +1426,4 @@ input:checked + .toggle-slider:before {
   padding: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
-}
-
-.font-control span {
-  font-size: 0.9rem;
-  color: #a2a8d3;
-}
-
-.font-control-buttons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.font-btn {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: rgba(230, 175, 46, 0.1);
-  border: 1px solid #e6af2e;
-  color: #e6af2e;
-  cursor: pointer;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  padding: 0;
-}
-
-.font-btn:hover {
-  background: #e6af2e;
-  color: #16213e;
-  transform: scale(1.1);
-}
-
-.font-btn:active {
-  transform: scale(0.95);
-}
-
-/* Animation for cog icon when settings are active */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(180deg); }
-}
-
-.settings-btn.active .settings-icon {
-  animation: spin 0.5s ease-out forwards;
-}
-
-/* Portrait mode - hide side navigation completely */
-@media (orientation: portrait) {
-  .side-navigation {
-    display: none !important;
-  }
-  
-  /* Ensure bottom navigation is visible in portrait */
-  .navigation-controls {
-    display: flex !important;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    border-radius: 1rem 1rem 0 0;
-    padding: 1rem;
-    background: rgba(22, 33, 62, 0.95);
-    backdrop-filter: blur(10px);
-    justify-content: space-between;
-    gap: 1rem;
-    z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-    padding-bottom: max(1rem, env(safe-area-inset-bottom));
-  }
-  
-  /* Improve readability in portrait mode */
-  .wudhu-step {
-    padding: 1rem 1.2rem;
-  }
-  
-  /* Add space at bottom for fixed navigation */
-  .wudhu-steps {
-    padding-bottom: calc(80px + env(safe-area-inset-bottom));
-  }
-  
-  /* Adjust step text padding */
-  .step-text {
-    padding: 0 0.5rem;
-  }
-  
-  @media (max-width: 480px) {
-    .nav-btn {
-      flex: 1;
-      min-height: 44px;
-      font-size: 1rem;
-      padding: 0.5rem 1rem;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    /* Adjust settings panel for small screens */
-    .settings-panel {
-      width: 200px;
-      padding: 45px 0.8rem 0.8rem;
-    }
-    
-    .font-control {
-      padding: 0.4rem;
-    }
-    
-    .font-btn {
-      width: 28px;
-      height: 28px;
-    }
-    
-    .settings-btn {
-      width: 36px;
-      height: 36px;
-    }
-    
-    .toggle-control {
-      padding: 0.4rem;
-    }
-    
-    .toggle-switch {
-      width: 46px;
-      height: 22px;
-    }
-    
-    .toggle-slider:before {
-      height: 14px;
-      width: 14px;
-    }
-    
-    input:checked + .toggle-slider:before {
-      transform: translateX(24px);
-    }
-  }
-}
-
-/* Landscape mode - show side navigation, hide bottom navigation */
-@media (orientation: landscape) {
-  .navigation-controls {
-    display: none !important;
-  }
-  
-  .side-navigation {
-    display: flex !important;
-  }
-  
-  /* Add padding in landscape mode to prevent text overlap with arrows */
-  body.landscape-mode .wudhu-step {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
-  
-  .nav-arrow {
-    background: rgba(22, 33, 62, 0.4);
-    backdrop-filter: blur(3px);
-  }
-  
-  .nav-arrow:hover {
-    background: rgba(22, 33, 62, 0.7);
-  }
-  
-  /* Remove fixed heights to prevent scrolling */
-  .wudhu-steps {
-    min-height: auto;
-    height: auto;
-  }
-  
-  /* Adjust the hadith container to fit viewport height */
-  #hadith-detail {
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Make content area take available space */
-  .wudhu-steps {
-    flex: 1;
-    overflow: auto;
-  }
-  
-  /* More compact text in landscape */
-  .arabic {
-    font-size: calc(var(--arabic-font-size, 1.8rem) * 0.9);
-    line-height: 1.5;
-  }
-  
-  .transliteration {
-    font-size: calc(var(--transliteration-font-size, 1rem) * 0.9);
-  }
-  
-  .translation {
-    font-size: calc(var(--english-font-size, 1rem) * 0.9);
-    line-height: 1.4;
-  }
-  
-  @media (max-height: 450px) {
-    #hadith-title {
-      font-size: 1.1rem;
-      margin: 0;
-    }
-    
-    .section-header {
-      margin-bottom: 0.3rem;
-    }
-    
-    /* Ultra compact mode for very short screens */
-    .wudhu-step {
-      padding: 0.5rem 60px;
-    }
-    
-    .progress-bar {
-      margin-bottom: 0.3rem;
-    }
-  }
-  
-  @media (max-height: 500px) {
-    .wudhu-step {
-      padding-left: 70px;
-      padding-right: 70px;
-    }
-    
-    .nav-arrow {
-      width: 70px;
-      background: rgba(22, 33, 62, 0.5);
-    }
-  }
-}
-
-/* Add larger touch targets for mobile */
-@media (max-width: 767px) {
-  .nav-btn {
-    min-height: 48px;
-    padding: 0.8rem 1.5rem;
-  }
-}
-
-/* Responsive adjustments for the options screen */
-@media (min-width: 768px) {
-  /* For tablets and larger, add a more sophisticated layout */
-  .hadith-options-grid {
-    padding: 1rem 2rem;
-  }
-  
-  .hadith-option-card {
-    max-width: 450px;
-    margin: 0 auto;
-  }
-}
-
-/* Night mode optimization */
-@media (prefers-color-scheme: dark) {
-  .hadith-option-card {
-    background: rgba(255, 255, 255, 0.07);
-  }
-  
-  .hadith-option-card:hover {
-    background: rgba(255, 255, 255, 0.12);
-  }
 }
