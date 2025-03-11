@@ -481,9 +481,15 @@ function adjustContentHeight() {
       // Set steps container to fill available space without creating scroll
       const availableHeight = viewportHeight - headerHeight - progressHeight - 20; // 20px for padding
       
+      // Make content use more width in landscape
+      stepsContainer.style.width = '100%';
+      stepsContainer.style.maxWidth = '100%';
+      
       // Ensure active step is fully visible
       const activeStep = document.querySelector('.wudhu-step.active');
       if (activeStep) {
+        activeStep.style.maxWidth = '100%';
+        
         // Check if step content exceeds available height
         if (activeStep.scrollHeight > availableHeight) {
           // If content needs scrolling, make container match available height
