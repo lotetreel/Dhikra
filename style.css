@@ -1427,3 +1427,49 @@ input:checked + .toggle-slider:before {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
 }
+/* Add these rules to your style.css file */
+
+/* Better landscape mode handling */
+@media (orientation: landscape) {
+  /* Expand the container to use more screen width */
+  .container {
+    max-width: 90vw;
+    padding: 0.5rem 1rem;
+  }
+  
+  /* Ensure the content area uses available space */
+  #hadith-detail {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Make step text flow better in landscape */
+  .wudhu-step {
+    padding: 1rem 80px;
+    max-width: 100%;
+  }
+  
+  /* Allow Arabic text to be wider */
+  .arabic {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Allow translation text to be wider */
+  .translation {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Make content area taller to reduce scrolling */
+  .wudhu-steps {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+  
+  /* Ensure modal uses more space */
+  .modal-content {
+    width: 90%;
+    max-width: 90vw;
+  }
+}
